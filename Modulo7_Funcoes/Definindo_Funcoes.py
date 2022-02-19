@@ -16,8 +16,8 @@ def bem_vindo(nome_do_curso, nome, sobrenome):  # nome_do_curso é parâmetro
 
 bem_vindo("JavaScript", "Sergio", "Sanchez")
 #  JavaScript é argumento, é passado no lugar do parâmetro
-#  Ou seja, parâmetro é o nome que aquela variável vai ter dentro da função
-#  e argumento é o valor efetivamente passado, que podem ser múltiplos
+#  Ou seja, PARÂMETRO é o nome que aquela variável vai ter dentro da função
+#  e ARGUMENTO é o valor efetivamente passado, que podem ser múltiplos
 #  Posso utilizar argumentos nomeados (keywords), como se vê abaixo:
 bem_vindo(nome="Sergio", nome_do_curso="JavaScript", sobrenome="Sanchez")
 #  Lembrando que, se eu nomeei um argumento no começo, tenho que nomear os
