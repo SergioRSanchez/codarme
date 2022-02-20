@@ -1,0 +1,6 @@
+"""
+    i. Deve conter uma classe 'Administrador' que estende (herda de) 'usuario'
+    ii. Deve sobrescrever o método 'imprime_usuario' e imprimir:
+"Gabriel (gabriel@exemplo.com) - Administrador", para uma instância com 'nome'
+= "Gabriel" e 'email' = "gabriel@exemplo.com"
+"""
