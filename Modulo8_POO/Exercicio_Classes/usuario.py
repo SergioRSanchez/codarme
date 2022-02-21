@@ -8,3 +8,16 @@ que imprime: "Gabriel (gabriel@exemplo.com)", para uma instância com
 armazena a quantidade de instâncias criadas, sejam instâncias de 'usuario' ou
 de qualquer classe que estenda 'usuario'. Por exemplo: Administrador(usuario)
 """
+
+
+class Usuario:
+    quantidade = 0
+
+    def __init__(self, nome, email):
+        self.nome = nome
+        self.email = email
+        self.quantidade = Usuario.quantidade
+        Usuario.quantidade += 1
+
+    def imprime_usuario(self):
+        print(f"{self.nome} ({self.email})")
