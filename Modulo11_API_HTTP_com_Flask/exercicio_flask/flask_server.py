@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, abort, make_response, request, url_for
+from flask import Flask, jsonify, abort, request, url_for
 from modelos import Evento, EventoOnline, eventos
 
 
@@ -14,7 +14,7 @@ def listar_eventos():
 
 
 @app.route("/api/eventos/<int:id>/")
-def detalhar_evento(id):  # view
+def detalhar_evento(id):
     ev = get_evento(id)
     return jsonify(ev.__dict__)
 
@@ -43,29 +43,35 @@ def criar_evento():
 
 @app.route("/api/eventos/<int:id>/", methods=["DELETE"])
 def deletar_evento(id):
-    evento = get_evento(id)  # Vai parar no `abort`
+    evento = get_evento(id)
     eventos.remove(evento)
     return (jsonify(id=evento.id), 200)
 
 
 @app.route("/api/eventos/<int:id>/", methods=["PATCH", "PUT"])  # Aceita tanto PATCH quanto PUT
 def editar_evento(id):
-    json_data = request.get_json() 
+    json_data = request.get_json()
     nome = json_data.get("nome", None)
     local = json_data.get("local", None)
-    if "nome" in json_data.keys():
-        if not nome:
-            abort(400,"'nome' precisa ser informado.")
-        else:
+    if request.method == "PATCH":
+        if "nome" in json_data.keys():
+            if not nome:
+                abort(400,"'nome' precisa ser informado.")
             evento = get_evento(id)
             evento.nome = nome
-    if "local" in json_data.keys():
-        if not local:
-            abort(400,"'local' precisa ser informado.")
-        else:
+        if "local" in json_data.keys():
+            if not local:
+                abort(400,"'local' precisa ser informado.")
             evento = get_evento(id)
             evento.local = local
-
+    elif request.method == "PUT":
+        if not nome:
+            abort(400,"'nome' precisa ser informado.")
+        if not local:
+            abort(400,"'local' precisa ser informado.")
+        evento = get_evento(id)
+        evento.nome = nome
+        evento.local = local
     return {
         "id": evento.id,
         "nome": evento.nome,
