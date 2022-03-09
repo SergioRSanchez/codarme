@@ -17,7 +17,7 @@ from xml.etree.ElementInclude import include
 from django.contrib import admin
 from django.urls import path
 from django.urls.conf import include
-from agenda.views import index
+from agenda.views import listar_eventos
 from agenda.urls import urlpatterns as agenda_urls
 
 urlpatterns = [

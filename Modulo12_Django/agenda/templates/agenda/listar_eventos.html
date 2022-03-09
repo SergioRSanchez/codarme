@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <style>
+            table {
+                border-collapse: collapse;
+            }
+
+            td, th {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
+        </style>
+    </head>
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Categoria</th>
+                <th>Local/Link</th>
+                <th>Data</th>
+                <th>Ação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for evento in eventos %}
+                <tr>
+                    <td>{{evento.nome}}</td>
+                    <td>{{evento.categoria.nome}}</td>
+                    <td>{% firstof evento.local evento.link %}</td>
+                    <td>
+                        {%if evento.data%}
+                            {{evento.data | date:"d/m/Y"}}
+                        {%else%}
+                            a definir.
+                        {%endif%}
+                    </td>
+                    <td><a href="{% url 'exibir_evento' evento.id %}">Ver detalhes</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<html>
