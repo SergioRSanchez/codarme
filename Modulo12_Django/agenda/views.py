@@ -3,7 +3,8 @@ from django.shortcuts import render, get_object_or_404
 from django.template import loader
 from django.urls import reverse
 
-from agenda.models import Evento
+
+from agenda.models import Evento, Categoria
 from datetime import date
 
 
@@ -17,12 +18,28 @@ def listar_eventos(request):
         template_name="agenda/listar_eventos.html"
     )
 
+def listar_categorias(request):
+    eventos = Categoria.objects.all()
+    return render(
+        request=request,
+        context={"eventos": eventos},
+        template_name="agenda/listar_categorias.html"
+    )
+
 def exibir_evento(request, id):
     evento = get_object_or_404(Evento, id=id)
     return render(
         request=request,
         context={"evento": evento},
         template_name="agenda/exibir_evento.html"
+    )
+
+def exibir_categoria(request, id):
+    categorias = get_object_or_404(Categoria, id=id)
+    return render(
+        request=request,
+        context={"categoria": categorias},
+        template_name="agenda/exibir_categoria.html"
     )
 
 def participar_evento(request):
@@ -32,3 +49,4 @@ def participar_evento(request):
     evento.save()
     
     return HttpResponseRedirect(reverse('exibir_evento', args=(evento_id,)))
+

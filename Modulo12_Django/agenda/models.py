@@ -18,3 +18,9 @@ class Evento(models.Model):
 
     def __str__(self):
         return f"{self.nome} <{self.id}>"
+
+    @classmethod
+    def cria_evento(cls, nome, local, link, data, participantes):
+        evento = cls(nome, local="Rio Preto", link=f"https://tamarcado.com/eventos?id={cls.id}", data=data, participantes=participantes)
+        evento = Evento(nome, local, link, data, participantes)
+        return evento

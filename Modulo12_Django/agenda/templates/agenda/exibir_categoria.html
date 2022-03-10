@@ -1,0 +1,11 @@
+<html>
+    <h1>Categoria: {{ categoria.nome }}</h1>
+    <p>Evento: {{ categoria.nome }}</p>
+    <br />
+    <form action="{% url 'participar_evento' %}" method="post">
+        {% csrf_token %}
+        <input type="hidden" name="evento_id" value="{{ categoria.id }}">
+        <input type="submit" value="Participar">
+    </form>
+    <p><a href="{% url 'listar_categorias' %}">Ir para listagem de categorias</a></p>
+</html>
