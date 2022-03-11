@@ -27,7 +27,7 @@
                 <tr>
                     <td>{{evento.nome}}</td>
                     <td>{{evento.categoria.nome}}</td>
-                    <td>{% firstof evento.local evento.link %}</td>
+                    <td>{% firstof evento.local evento.link 'A Definir' %}</td>
                     <td>
                         {%if evento.data%}
                             {{evento.data | date:"d/m/Y"}}

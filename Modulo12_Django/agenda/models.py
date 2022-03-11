@@ -3,7 +3,7 @@ from django.db import models
 
 # Create your models here.9
 class Categoria(models.Model):
-    nome = models.CharField(max_length=256, blank=False,unique=True)  #  CharField é texto
+    nome = models.CharField(max_length=256, blank=False,unique=True)
 
     def __str__(self):
         return f"{self.nome} <{self.id}>"

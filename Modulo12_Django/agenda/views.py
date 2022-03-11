@@ -1,6 +1,5 @@
 from django.http.response import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.template import loader
 from django.urls import reverse
 
 
@@ -36,9 +35,14 @@ def exibir_evento(request, id):
 
 def exibir_categoria(request, id):
     categorias = get_object_or_404(Categoria, id=id)
+    eventos = Evento.objects.filter(categoria=categorias)
+    eventos_contagem = eventos.count()
     return render(
         request=request,
-        context={"categoria": categorias},
+        context={
+            "categoria": categorias,
+            "contagem": eventos_contagem
+            },
         template_name="agenda/exibir_categoria.html"
     )
 
