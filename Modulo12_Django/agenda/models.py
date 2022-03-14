@@ -1,7 +1,7 @@
 #  Modelo é qualquer entidade que represente algum objeto
 from django.db import models
 
-# Create your models here.9
+# Create your models here
 class Categoria(models.Model):
     nome = models.CharField(max_length=256, blank=False,unique=True)
 
@@ -35,7 +35,7 @@ class Evento(models.Model):
         if not categoria:
             raise ValueError("Evento precisa de uma categoria.")
         if local and link:
-            raise ValueError("Evento não pode possuir local e link.")
+            raise ValueError("Evento não pode possuir local E link.")
         if local:
             evento = Evento(nome=nome, categoria=categoria, local=local, data=data)
         if link:
