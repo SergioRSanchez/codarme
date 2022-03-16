@@ -3,6 +3,7 @@ from tarefa import Tarefa
 
 
 class TestConcluir(unittest.TestCase):
+
     def test_concluir_tarefa_altera_concluida_para_true(self):
         tarefa =  Tarefa("Estudar Python")
         tarefa.concluir()
@@ -15,8 +16,13 @@ class TestConcluir(unittest.TestCase):
         tarefa.concluir()
         self.assertEqual(tarefa.concluida, True)
     
-    def test_adicionar_comentario(self):
-        ...
+
+class TestDescricao(unittest.TestCase):
+
+    def test_adicionar_descricao(self):
+        tarefa = Tarefa("Teste")
+        tarefa.adicionar_descricao("asdas")
+        self.assertEqual(tarefa.descricao, "asdas")
 
 
 
