@@ -14,6 +14,9 @@ class TestConcluir(unittest.TestCase):
         self.assertEqual(tarefa.concluida, True)
         tarefa.concluir()
         self.assertEqual(tarefa.concluida, True)
+    
+    def test_adicionar_comentario(self):
+        ...
 
 
 
