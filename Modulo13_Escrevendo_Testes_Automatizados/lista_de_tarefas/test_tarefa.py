@@ -21,8 +21,15 @@ class TestDescricao(unittest.TestCase):
 
     def test_adicionar_descricao(self):
         tarefa = Tarefa("Teste")
-        tarefa.adicionar_descricao("asdas")
-        self.assertEqual(tarefa.descricao, "asdas")
+        tarefa.adicionar_descricao("Primeiro Teste")
+        self.assertEqual(tarefa.descricao, "Primeiro Teste")
+    
+    def test_trocar_de_descricao(self):
+        tarefa = Tarefa("Teste")
+        tarefa.adicionar_descricao("Primeiro Teste")
+        tarefa = Tarefa("Teste")
+        tarefa.adicionar_descricao("Segundo Teste")
+        self.assertEqual(tarefa.descricao, "Segundo Teste")
 
 
 
