@@ -1,5 +1,5 @@
 # Test Driven Development: escrever os testes antes da nossa lógica.
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 
 class Tarefa:
@@ -39,4 +39,10 @@ class Tarefa:
         """
         Diz se tarefa está atrasada. Ou seja, data < hoje.
         """
-        pass
+        if self.data is None:
+            return
+
+        if self.data < datetime.today():
+            return "Atrasada"
+        else:
+            return "Dentro do prazo"

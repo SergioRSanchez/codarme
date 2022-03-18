@@ -1,6 +1,6 @@
 import unittest
 from tarefa import Tarefa
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class TestConcluir(unittest.TestCase):
@@ -40,6 +40,21 @@ class TestAdiarNotificacao(unittest.TestCase):
         tarefa.adiar_notificacao(15)
         dt_esperado = datetime(2022, 2, 10, 9, 25)
         self.assertEqual(tarefa.data_notificacao, dt_esperado)
+
+class TestAtrasada(unittest.TestCase):
+    def test_tarefa_esta_atrasada(self):
+        hoje = datetime.today()
+        dt_original = hoje + timedelta(days=-5)
+        tarefa = Tarefa("Estudar Python", data=dt_original)
+        tarefa.atrasada()
+        self.assertEqual(tarefa.atrasada(), "Atrasada")
+    
+    def test_tarefa_esta_dentro_do_prazo(self):
+        hoje = datetime.today()
+        dt_original = hoje + timedelta(days=5)
+        tarefa = Tarefa("Estudar Python", data=dt_original)
+        tarefa.atrasada()
+        self.assertEqual(tarefa.atrasada(), "Dentro do prazo")
 
 
 
