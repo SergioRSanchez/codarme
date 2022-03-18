@@ -1,5 +1,6 @@
 import unittest
 from tarefa import Tarefa
+from datetime import datetime
 
 
 class TestConcluir(unittest.TestCase):
@@ -20,16 +21,26 @@ class TestConcluir(unittest.TestCase):
 class TestDescricao(unittest.TestCase):
 
     def test_adicionar_descricao(self):
-        tarefa = Tarefa("Teste")
+        tarefa = Tarefa("Estudar Python")
         tarefa.adicionar_descricao("asdas")
         self.assertEqual(tarefa.descricao, "asdas")
     
     def test_adicionar_nova_descricao(self):
-        tarefa = Tarefa("Teste")
+        tarefa = Tarefa("Estudar Python")
         tarefa.adicionar_descricao("Primeira Descrição")
         self.assertEqual(tarefa.descricao, "Primeira Descrição")
         tarefa.adicionar_descricao("Segunda Descrição")
         self.assertEqual(tarefa.descricao, "Segunda Descrição")
+
+class TestAdiarNotificacao(unittest.TestCase):
+
+    def test_adia_notificacao_em_N_minutos(self):
+        dt_original = datetime(2022, 2, 10, 9, 10)
+        tarefa = Tarefa("Estudar Python", data_notificacao=dt_original)
+        tarefa.adiar_notificacao(15)
+        dt_esperado = datetime(2022, 2, 10, 9, 25)
+        self.assertEqual(tarefa.data_notificacao, dt_esperado)
+
 
 
 
