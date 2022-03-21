@@ -15,6 +15,9 @@ CALCULADORA DE NOTAS
     - 0 <= nota < 1    =>    "F
 """
 
+import statistics
+
+
 class Turma:
     
     def __init__(self):
@@ -33,12 +36,10 @@ class Turma:
     
     
     def get_media(self):
-        soma_das_notas = 0
-        qtd_de_notas = 0
-        if self.get_aluno_turma() == True:
-            soma = sum(nota)
-            quantidade = len(nota)
-            media = soma / quantidade
+        soma_das_notas = []
+        for nome, nota in self.lista_turma:
+            soma_das_notas.append(nota)
+            media = statistics.mean(soma_das_notas)
             return media
 
 
