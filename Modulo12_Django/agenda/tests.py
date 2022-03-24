@@ -39,4 +39,20 @@ class TestListagemDeEventos(TestCase):
     
 
     def test_evento_sem_data_sao_exibidos(self):
-        ...
+        categoria = Categoria()
+        categoria.nome = "Backend"
+        categoria.save()
+
+        evento = Evento()
+        evento.nome = "Aula de Python"
+        evento.categoria = categoria
+        evento.local = "Rio de Janeiro"
+        evento.data = None
+        evento.save()
+
+        client = Client()
+        response = client.get("/")
+
+        self.assertContains(response, "Aula de Python")
+        self.assertContains(response, "A definir")
+        self.assertEqual(list(response.context["eventos"]), [evento])
