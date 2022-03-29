@@ -9,7 +9,7 @@ from agenda.serializers import AgendamentoSerializer
 
 # Create your views here.
 
-@api_view(http_method_names=["GET", "PUT"])
+@api_view(http_method_names=["GET", "PUT", "PATCH"])
 def agendamento_detail(request, id):
     if request.method == "GET":
         #  Buscar instância de Agendamento
@@ -29,6 +29,18 @@ def agendamento_detail(request, id):
             obj.telefone_cliente = validated_data.get("telefone_cliente", obj.telefone_cliente)
             obj.save()
             return JsonResponse(serializer.data, status=200)
+        return JsonResponse(serializer.errors, status=400)
+    if request.method == "PATCH":
+        obj = get_object_or_404(Agendamento, id=id)
+        serializer = AgendamentoSerializer(data=request.data, partial=True)  #  o partial é para que ,nesse caso, o requirimento das chaves no serializer não sejam todas obrigatório, fazendo com que eu não precise passar todas as chaves
+        if serializer.is_valid():
+            validated_data = serializer.validated_data
+            obj.data_horario = validated_data.get("data_horario", obj.data_horario)  # caso o novo valor passado dessa chave seja nulo, ele usa o valor antigo
+            obj.nome_cliente = validated_data.get("nome_cliente", obj.nome_cliente)
+            obj.email_cliente = validated_data.get("email_cliente", obj.email_cliente)
+            obj.telefone_cliente = validated_data.get("telefone_cliente", obj.telefone_cliente)
+            obj.save()
+            return JsonResponse(validated_data, status=200)
         return JsonResponse(serializer.errors, status=400)
 
 
