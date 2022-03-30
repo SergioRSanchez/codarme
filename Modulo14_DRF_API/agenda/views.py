@@ -18,12 +18,12 @@ def agendamento_detail(request, id):
         serializer = AgendamentoSerializer(obj)
         #  Retornar JsonResponse com os dados do serializer
         return JsonResponse(serializer.data, status=200)
-    if request.method == "PUT":  #  Esse método não é tão necessário, visto que temos o método Patch listado abaixo, porém deixei para posteriores consultas se necessárias
+    if request.method == "PUT":  #  Esse método não se faz necessário, visto que temos o método Patch listado abaixo, porém deixei para posteriores consultas se necessárias
         obj = get_object_or_404(Agendamento, id=id)
         serializer = AgendamentoSerializer(data=request.data)
         if serializer.is_valid():
             validated_data = serializer.validated_data
-            obj.data_horario = validated_data.get("data_horario", obj.data_horario)  # caso o novo valor passado dessa chave seja nulo, ele usa o valor antigo
+            obj.data_horario = validated_data.get("data_horario", obj.data_horario)  # Caso o novo valor passado dessa chave seja nulo, ele usa o valor antigo
             obj.nome_cliente = validated_data.get("nome_cliente", obj.nome_cliente)
             obj.email_cliente = validated_data.get("email_cliente", obj.email_cliente)
             obj.telefone_cliente = validated_data.get("telefone_cliente", obj.telefone_cliente)
@@ -32,10 +32,10 @@ def agendamento_detail(request, id):
         return JsonResponse(serializer.errors, status=400)
     if request.method == "PATCH":
         obj = get_object_or_404(Agendamento, id=id)
-        serializer = AgendamentoSerializer(data=request.data, partial=True)  #  o partial é para que ,nesse caso, o requirimento das chaves no serializer não sejam todas obrigatório, fazendo com que eu não precise passar todas as chaves
+        serializer = AgendamentoSerializer(data=request.data, partial=True)  #  O partial é para que ,nesse caso, o requirimento das chaves no serializer não sejam todas obrigatório, fazendo com que eu não precise passar todas as chaves
         if serializer.is_valid():
             validated_data = serializer.validated_data
-            obj.data_horario = validated_data.get("data_horario", obj.data_horario)  # caso o novo valor passado dessa chave seja nulo, ele usa o valor antigo
+            obj.data_horario = validated_data.get("data_horario", obj.data_horario)  # Caso o novo valor passado dessa chave seja nulo, ele usa o valor antigo
             obj.nome_cliente = validated_data.get("nome_cliente", obj.nome_cliente)
             obj.email_cliente = validated_data.get("email_cliente", obj.email_cliente)
             obj.telefone_cliente = validated_data.get("telefone_cliente", obj.telefone_cliente)
@@ -44,8 +44,8 @@ def agendamento_detail(request, id):
         return JsonResponse(serializer.errors, status=400)
     if request.method == "DELETE":
         obj = get_object_or_404(Agendamento, id=id)
-        #  obj.delete()  # ao invés de deletar e perder aquele registro, quero deixar salvo que foi cancelado, podendo dessa maneira exibir uma lista de objetos cancelados
-        obj.horario_cancelado = True  # para isso tenho que criar um atributo "cancelado" em models.py, e fazer a migração. Quando criamos o objeto, esse atributo está como 'False', e quando cancelamos, ele deve virar 'True'
+        #  obj.delete()  # Ao invés de deletar e perder aquele registro, quero deixar salvo que foi cancelado, podendo dessa maneira exibir uma lista de objetos cancelados
+        obj.horario_cancelado = True  # Para isso tenho que criar um atributo "cancelado" em models.py, e fazer a migração. Quando criamos o objeto, esse atributo está como 'False', e quando cancelamos, ele deve virar 'True'
         obj.save()
         return Response(status=204)
 
@@ -64,7 +64,7 @@ def agendamento_list(request):
         # Criar serializer a partir de `data`
         serializer = AgendamentoSerializer(data=data)
         if serializer.is_valid():  #  Faz toda aquela validação que fazíamos manualmente
-            validated_data = serializer.validated_data  #  quando o serializer.is_valid() está certo, automaticamente o serializer.validated_data é populado
+            validated_data = serializer.validated_data  #  Quando o serializer.is_valid() está certo, automaticamente o serializer.validated_data é populado
             Agendamento.objects.create(
                 data_horario=validated_data["data_horario"],
                 nome_cliente=validated_data["nome_cliente"],
