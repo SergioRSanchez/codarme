@@ -56,7 +56,7 @@ def agendamento_detail(request, id):
 @api_view(http_method_names=["GET", "POST"]) 
 def agendamento_list(request):
     if request.method == "GET":
-        queryset = Agendamento.objects.all()
+        queryset = Agendamento.objects.exclude(horario_cancelado=True)
         serializer = AgendamentoSerializer(queryset, many=True)  # many=True indica que o objeto sendo serializado é uma coleção
         return JsonResponse(serializer.data, safe=False)  # safe=False: permite serialização de objetos que não são dicionários (lista)
     if request.method == "POST":
