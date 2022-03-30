@@ -1,15 +1,15 @@
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 from agenda.models import Agendamento
 from agenda.serializers import AgendamentoSerializer
 
 
-
-
 # Create your views here.
 
-@api_view(http_method_names=["GET", "PUT", "PATCH"])
+@api_view(http_method_names=["GET", "PUT", "PATCH", "DELETE"])
 def agendamento_detail(request, id):
     if request.method == "GET":
         #  Buscar instância de Agendamento
@@ -42,8 +42,14 @@ def agendamento_detail(request, id):
             obj.save()
             return JsonResponse(validated_data, status=200)
         return JsonResponse(serializer.errors, status=400)
+    if request.method == "DELETE":
+        obj = get_object_or_404(Agendamento, id=id)
+        obj.delete()  # ao invés de deletar e perder aquele registro, quero deixar salvo que foi cancelado, podendo dessa maneira exibir uma lista de objetos cancelados
+        obj.cancelado = True  # para isso tenho que criar um atributo "cancelado" em models.py, e fazer a migração. Quando criamos o objeto, esse atributo está como 'False', e quando cancelamos, ele deve virar 'True'
+        return Response(status=204)
 
-
+#  Os objetos cancelados deve ser removidos da listagem de agendamento abaixo
+#  Como requisito, não deve aparecer o atributo 'cancelado', portanto não devo mexer no AgendamentoSerializer, somente em models.py mesmo
 
 
 @api_view(http_method_names=["GET", "POST"]) 
