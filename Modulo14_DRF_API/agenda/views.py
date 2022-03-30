@@ -44,8 +44,9 @@ def agendamento_detail(request, id):
         return JsonResponse(serializer.errors, status=400)
     if request.method == "DELETE":
         obj = get_object_or_404(Agendamento, id=id)
-        obj.delete()  # ao invés de deletar e perder aquele registro, quero deixar salvo que foi cancelado, podendo dessa maneira exibir uma lista de objetos cancelados
-        obj.cancelado = True  # para isso tenho que criar um atributo "cancelado" em models.py, e fazer a migração. Quando criamos o objeto, esse atributo está como 'False', e quando cancelamos, ele deve virar 'True'
+        #  obj.delete()  # ao invés de deletar e perder aquele registro, quero deixar salvo que foi cancelado, podendo dessa maneira exibir uma lista de objetos cancelados
+        obj.horario_cancelado = True  # para isso tenho que criar um atributo "cancelado" em models.py, e fazer a migração. Quando criamos o objeto, esse atributo está como 'False', e quando cancelamos, ele deve virar 'True'
+        obj.save()
         return Response(status=204)
 
 #  Os objetos cancelados deve ser removidos da listagem de agendamento abaixo
