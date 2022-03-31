@@ -32,15 +32,10 @@ def agendamento_detail(request, id):
         return JsonResponse(serializer.errors, status=400)
     if request.method == "PATCH":
         obj = get_object_or_404(Agendamento, id=id)
-        serializer = AgendamentoSerializer(data=request.data, partial=True)  #  O partial é para que ,nesse caso, o requirimento das chaves no serializer não sejam todas obrigatório, fazendo com que eu não precise passar todas as chaves
+        serializer = AgendamentoSerializer(obj, data=request.data, partial=True)  #  O partial é para que ,nesse caso, o requirimento das chaves no serializer não sejam todas obrigatório, fazendo com que eu não precise passar todas as chaves
         if serializer.is_valid():
-            validated_data = serializer.validated_data
-            obj.data_horario = validated_data.get("data_horario", obj.data_horario)  # Caso o novo valor passado dessa chave seja nulo, ele usa o valor antigo
-            obj.nome_cliente = validated_data.get("nome_cliente", obj.nome_cliente)
-            obj.email_cliente = validated_data.get("email_cliente", obj.email_cliente)
-            obj.telefone_cliente = validated_data.get("telefone_cliente", obj.telefone_cliente)
-            obj.save()
-            return JsonResponse(validated_data, status=200)
+            serializer.save()
+            return JsonResponse(serializer.data, status=200)
         return JsonResponse(serializer.errors, status=400)
     if request.method == "DELETE":
         obj = get_object_or_404(Agendamento, id=id)
@@ -65,12 +60,7 @@ def agendamento_list(request):
         serializer = AgendamentoSerializer(data=data)
         if serializer.is_valid():  #  Faz toda aquela validação que fazíamos manualmente
             validated_data = serializer.validated_data  #  Quando o serializer.is_valid() está certo, automaticamente o serializer.validated_data é populado
-            Agendamento.objects.create(
-                data_horario=validated_data["data_horario"],
-                nome_cliente=validated_data["nome_cliente"],
-                email_cliente=validated_data["email_cliente"],
-                telefone_cliente=validated_data["telefone_cliente"],
-            )  # TODO: criar instância de Agendamento com valores validados.
+            serializer.save()
             return JsonResponse(serializer.data, status=201)
         # TODO: retornar JsonResponse com os erros do serializer e status 400
         return JsonResponse(serializer.errors, status=400)
