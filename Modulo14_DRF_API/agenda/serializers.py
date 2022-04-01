@@ -19,7 +19,11 @@ class AgendamentoSerializer(serializers.Serializer):
         email_cliente = attrs.get("email_cliente", "")
 
         if email_cliente.endswith(".br") and telefone_cliente.startswith("+") and not telefone_cliente.startswith("+55"):
-            raise serializers.ValidationError("O telefone deve ser no formato +55XXX-XXXX-XXXX")
+            raise serializers.ValidationError("O telefone deve ser no formato +55XX-XXXX-XXXX")
+        if len(telefone_cliente) < 8:
+            raise serializers.ValidationError("O telefone deve ter pelo menos 8 dígitos")
+        if not telefone_cliente.isdigit():
+            raise serializers.ValidationError("O telefone deve conter apenas dígitos")
         return attrs
 
     def create(self, validated_data):
