@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.utils import timezone
+import re
 
 from agenda.models import Agendamento
 
@@ -22,8 +23,12 @@ class AgendamentoSerializer(serializers.Serializer):
             raise serializers.ValidationError("O telefone deve ser no formato +55XX-XXXX-XXXX")
         if len(telefone_cliente) < 8:
             raise serializers.ValidationError("O telefone deve ter pelo menos 8 dígitos")
-        if not telefone_cliente.isdigit():
-            raise serializers.ValidationError("O telefone deve conter apenas dígitos")
+        for i in telefone_cliente:
+            if i == "+" and not telefone_cliente.startswith("+"):
+                raise serializers.ValidationError("Se o número conter o caractere +, ele deve estar no início do telefone")
+        pattern = r"[0-9]$"  # TENTAR USAR O RE PARA VALIDAR O TELEFONE
+        if not re.match(pattern, telefone_cliente):
+            raise serializers.ValidationError("O telefone deve conter apenas números")
         return attrs
 
     def create(self, validated_data):
