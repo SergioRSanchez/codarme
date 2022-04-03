@@ -26,9 +26,10 @@ class AgendamentoSerializer(serializers.Serializer):
         for i in telefone_cliente:
             if i == "+" and not telefone_cliente.startswith("+"):
                 raise serializers.ValidationError("Se o número conter o caractere +, ele deve estar no início do telefone")
-        pattern = r"[0-9]$"  # TENTAR USAR O RE PARA VALIDAR O TELEFONE
-        if not re.match(pattern, telefone_cliente):
-            raise serializers.ValidationError("O telefone deve conter apenas números")
+        validate = r"[0-9+()-]{7}$"
+        if not re.search(validate, telefone_cliente):
+            raise serializers.ValidationError("O telefone deve conter apenas números ou caracteres especiais")
+        #  O mesmo email_cliente não pode realizar mais de um agendamento no mesmo dia
         return attrs
 
     def create(self, validated_data):
