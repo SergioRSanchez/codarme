@@ -33,14 +33,14 @@ print("")
 #  É possível conseguir resultados diferentes, sem alterar os números e
 #  operadores, apenas com a utilização de parênteses, por exemplo
 
-resultado = (2 + 3) * 2 ** 2
+resultado = (2 + 3) * 2**2
 print(resultado)
 #  = 20
 
 #  Utilize parênteses de modo que o código imprima os seguintes resultados:
 
 #  14
-resultado = 2 + 3 * 2 ** 2
+resultado = 2 + 3 * 2**2
 print(resultado)
 
 #  38
@@ -73,7 +73,8 @@ if compra.isdigit() and frete.isdigit() == True:
     compra = float(compra)
     frete = float(frete)
     fidelidade = input(
-        "O cliente é cadastrado no programa de fidelidade? [S] ou [N]: ").upper()
+        "O cliente é cadastrado no programa de fidelidade? [S] ou [N]: "
+    ).upper()
 
     if compra + frete >= 100 or fidelidade == "S":
         print("Cupom Liberado")

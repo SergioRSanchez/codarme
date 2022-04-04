@@ -26,14 +26,12 @@ print(e_igual)
 
 #  Ou intersecção
 print(usuarios.intersection(usuarios_unicos))
-e_intersec = usuarios.intersection(
-    usuarios_unicos) == usuarios & usuarios_unicos
+e_intersec = usuarios.intersection(usuarios_unicos) == usuarios & usuarios_unicos
 print(e_intersec)
 
 #  Ou diferença
 print(usuarios.difference(usuarios_unicos))
-e_differenc = usuarios.difference(
-    usuarios_unicos) == usuarios - usuarios_unicos
+e_differenc = usuarios.difference(usuarios_unicos) == usuarios - usuarios_unicos
 print(e_differenc)
 
 #  Ainda tem outras operações, que podem ser vistas na documentação oficial

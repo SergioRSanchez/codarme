@@ -26,15 +26,12 @@ print("####################################")
 
 pessoa = ["Gabriel", 27, "123456"]
 print(f"O nome é {pessoa[0]}")
-print(f'A idade é {pessoa[1]}')
+print(f"A idade é {pessoa[1]}")
 print(f"A senha é {pessoa[2]}")
 
 print("####################################")
 
-pessoas = [
-    ["Gabriel", 27],
-    ["Bruno", 30]
-]
+pessoas = [["Gabriel", 27], ["Bruno", 30]]
 print(f"O nome é {pessoas[1][0]}")
 print(f"A idade é {pessoas[1][1]}")
 

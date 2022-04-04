@@ -1,6 +1,7 @@
 #  Ao escrevermos uma função, não estamos executando as instruções dentro dela
 #  Estamos dizendo que existe a função, e que posteriormente poderemos usa-lá
 
+
 def dar_boas_vindas():
     print("Olá.")
     print("Bem vindo ao curso de Python")

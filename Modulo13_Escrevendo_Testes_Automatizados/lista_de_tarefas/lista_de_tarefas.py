@@ -1,5 +1,6 @@
 from datetime import date, datetime
 
+
 class ListaDeTarefas:
     def __init__(self):
         """
@@ -8,7 +9,7 @@ class ListaDeTarefas:
         """
         self._tarefas = []
         self._quantidade_tarefas = 0
-    
+
     def adicionar_tarefa(self, tarefa):
         """
         Adiciona uma tarefa na lista (_tarefas.append).
@@ -25,7 +26,6 @@ class ListaDeTarefas:
             if not tarefa.concluida:
                 tarefas_nao_concluidas.append(tarefa)
         return tarefas_nao_concluidas
-
 
     def get_tarefas_atrasadas(self):
         """
@@ -46,4 +46,3 @@ class ListaDeTarefas:
             if tarefa.data == date.today():
                 tarefa_hoje.append(tarefa)
         return tarefa_hoje
-    

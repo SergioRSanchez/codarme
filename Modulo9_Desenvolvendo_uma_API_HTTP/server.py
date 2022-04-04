@@ -75,16 +75,18 @@ class SimpleHandler(BaseHTTPRequestHandler):
             self.end_headers()
             lista_dict_eventos = []
             for ev in eventos:
-                lista_dict_eventos.append({
-                    "id": ev.id,
-                    "nome": ev.nome,
-                    "local": ev.local,
-                })
+                lista_dict_eventos.append(
+                    {
+                        "id": ev.id,
+                        "nome": ev.nome,
+                        "local": ev.local,
+                    }
+                )
 
-# só consegue seriarizar(transformar em json) arquivos que forem dicionário
+            # só consegue seriarizar(transformar em json) arquivos que forem dicionário
             data = json.dumps(lista_dict_eventos).encode()
             self.wfile.write(data)
 
 
-server = HTTPServer(('localhost', 8000), SimpleHandler)
+server = HTTPServer(("localhost", 8000), SimpleHandler)
 server.serve_forever()

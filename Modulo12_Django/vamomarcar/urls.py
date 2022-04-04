@@ -21,6 +21,6 @@ from agenda.views import listar_eventos
 from agenda.urls import urlpatterns as agenda_urls
 
 urlpatterns = [
-    path('admin/', admin.site.urls),  #  esse é o app de administração
+    path("admin/", admin.site.urls),  #  esse é o app de administração
     path("", include(agenda_urls)),
 ]

@@ -15,5 +15,5 @@ desconto = 0.1
 quantidade_itens = 10
 final = float(valor_compras - (valor_compras * desconto)) * quantidade_itens
 
-print(f'O valor final da compra, considerando o desconto é {final:.2f} reais')
-print(f'O custo médio de cada item é de {final/10:.2f} reais')
+print(f"O valor final da compra, considerando o desconto é {final:.2f} reais")
+print(f"O custo médio de cada item é de {final/10:.2f} reais")

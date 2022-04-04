@@ -97,5 +97,5 @@ class SimpleHandler(BaseHTTPRequestHandler):
             print("Implementar!")
 
 
-server = HTTPServer(('localhost', 8000), SimpleHandler)
+server = HTTPServer(("localhost", 8000), SimpleHandler)
 server.serve_forever()

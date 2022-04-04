@@ -1,4 +1,3 @@
-
 class Evento:  # funciona como criar um tipo (string, int, float, etc)
     def altera_nome_evento(self, novo_nome):
         print("Alterando nome do evento")

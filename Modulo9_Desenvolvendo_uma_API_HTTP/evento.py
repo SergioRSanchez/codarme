@@ -23,11 +23,7 @@ class Evento:
         print("----------------------------------------------------")
 
     def to_json(self):
-        return json.dumps({
-            "id": self.id,
-            "local": self.local,
-            "nome": self.nome
-        })
+        return json.dumps({"id": self.id, "local": self.local, "nome": self.nome})
 
     @staticmethod
     def calcula_limite_pessoas_area(area):

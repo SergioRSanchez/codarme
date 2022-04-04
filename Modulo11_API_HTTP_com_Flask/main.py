@@ -15,9 +15,11 @@ ev_online2 = EventoOnline("Live de JavaScript")
 ev = Evento("Aula de Python", "Rio de Janeiro")
 eventos = [ev_online, ev_online2, ev]
 
+
 @app.route("/")
 def index():
     return "<h1>Flask configurado com sucesso!</h1>"
+
 
 @app.route("/api/eventos/")
 def listar_eventos():
@@ -26,10 +28,12 @@ def listar_eventos():
         eventos_dict.append(ev.__dict__)
     return jsonify(eventos_dict)
 
+
 """ O jsonify, por baixo dos panos utiliza o json.dumps, mas ele também
 transforma a resposta em um json para o Cliente (navegador no caso) que
 está consumindo nossa API. Portanto ele já altera o Content-Type Header para
 application/json, por exemplo. """
+
 
 @app.route("/api/eventos/", methods=["POST"])
 def criar_evento():
@@ -47,12 +51,11 @@ def criar_evento():
         evento = EventoOnline(nome=nome)
 
     eventos.append(evento)
-    
-    #return data
-    return {
-        "id": evento.id,
-        "url": f"/api/eventos/{evento.id}/"
-    }
+
+    # return data
+    return {"id": evento.id, "url": f"/api/eventos/{evento.id}/"}
+
+
 """
 request representa a requisição, data é o conjunto de dados. json.loads 
 contrário do dumps (que pega um dicionário e retorna um json), portanto ele
@@ -73,15 +76,18 @@ def get_evento_or_404(id):
             return ev
     abort(404, "Evento não encontrado.")
 
+
 #  Lidar com erro 400
-@app.errorhandler(400) 
+@app.errorhandler(400)
 def nao_encontrado(erro):
     return (jsonify(erro=str(erro)), 400)
 
+
 #  Lidar com erro 404
-@app.errorhandler(404) 
+@app.errorhandler(404)
 def nao_encontrado(erro):
     return (jsonify(erro=str(erro)), 404)
+
 
 #  Detalhar evento
 @app.route("/api/eventos/<int:id>/")
@@ -89,12 +95,14 @@ def detalhar_evento(id):  #  view detalhar
     ev = get_evento_or_404(id)
     return jsonify(ev.__dict__)
 
+
 #  Deletar evento
 @app.route("/api/eventos/<int:id>/", methods=["DELETE"])
 def deletar_evento(id):  #  view deletar
     ev = get_evento_or_404(id)
     eventos.remove(ev)
     return jsonify(id=id)
+
 
 #  Editar evento (usamos PUT quando for editar tudo do evento)
 @app.route("/api/eventos/<int:id>/", methods=["PUT"])
@@ -108,12 +116,13 @@ def editar_evento(id):  #  view editar
         abort(400, "'nome' precisa ser informado!")
     if not local:
         abort(400, "'local' precisa ser informado!")
-    
+
     ev = get_evento_or_404(id)
     ev.nome = nome
     ev.local = local
 
     return jsonify(ev.__dict__)
+
 
 #  Editar evento (usamos PATCH quando for editar alguma parte do evento)
 @app.route("/api/eventos/<int:id>/", methods=["PATCH"])
@@ -127,7 +136,7 @@ def editar_evento_parcial(id):  #  view editar
         if not nome:
             abort(400, "'nome' precisa ser informado!")
         ev.nome = nome
-    
+
     if "local" in data.keys():
         local = data.get("local")
         if not local:

@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 
+
 class Agendamento(models.Model):
     data_horario = models.DateTimeField()
     nome_cliente = models.CharField(max_length=255)

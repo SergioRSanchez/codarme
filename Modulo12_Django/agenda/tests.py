@@ -7,7 +7,6 @@ from agenda.models import Evento, Categoria
 
 
 class TestPaginaInicial(TestCase):
-
     def test_lista_eventos(self):
         client = Client()
         response = client.get("/")
@@ -17,7 +16,6 @@ class TestPaginaInicial(TestCase):
 
 
 class TestListagemDeEventos(TestCase):
-    
     def test_evento_com_data_de_hoje_e_exibido(self):
         categoria = Categoria()
         categoria.nome = "Backend"
@@ -36,7 +34,6 @@ class TestListagemDeEventos(TestCase):
         self.assertContains(response, "Aula de Python")
         self.assertEqual(response.context["eventos"][0], evento)
         self.assertEqual(list(response.context["eventos"]), [evento])
-    
 
     def test_evento_sem_data_sao_exibidos(self):
         categoria = Categoria()

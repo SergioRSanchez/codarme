@@ -1,4 +1,3 @@
-
 """ Economiza memória, pois novos símbolos vão ser atribuídos ao mesmo objeto.
 Vamos supor que tenhamos a variável x = 10.
 O que acontece por baixo dos panos é que "x" é um SÍMBOLO que está apontando

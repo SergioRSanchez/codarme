@@ -19,22 +19,18 @@ import statistics
 
 
 class Turma:
-    
     def __init__(self):
         self.lista_turma = []
-    
-    
+
     def adiciona_aluno_na_lista_da_turma(self, aluno):
         self.lista_turma.append(aluno)
-    
 
     def get_aluno_turma(self):
         lista_turma_de_alunos = []
         for aluno in self.lista_turma:
             lista_turma_de_alunos.append(aluno)
         return lista_turma_de_alunos
-    
-    
+
     def get_media(self):
         soma_das_notas = []
         for nome, nota in self.lista_turma:
@@ -43,15 +39,11 @@ class Turma:
             return media
 
 
-
-
 class Aluno:
-    
     def __init__(self, nome, nota):
         self.nome = nome
         self.nota = nota
 
-    
     def adiciona_aluno(self, nome, nota):
         self.nome = nome
         self.nota = nota

@@ -41,9 +41,6 @@ print(idades)
 #  Para fazer um exemplo completo, posso ter uma lista com tuplas dentro, por
 #  exemplo, uma lista de pessoas
 
-convidados = (
-    ["Sergio", 31, True],
-    ["Carol", 30, True]
-)
+convidados = (["Sergio", 31, True], ["Carol", 30, True])
 sergio, carol = convidados
 print(sergio)

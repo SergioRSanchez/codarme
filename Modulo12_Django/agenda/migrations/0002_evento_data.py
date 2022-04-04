@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('agenda', '0001_initial'),
+        ("agenda", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='evento',
-            name='data',
+            model_name="evento",
+            name="data",
             field=models.DateField(null=True),
         ),
     ]

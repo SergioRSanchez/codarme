@@ -1,18 +1,23 @@
 # Quando falamos de Métodos (Funções) em uma Classe em Python, existem 3 tipos:
 
-class Event():
+
+class Event:
     def metodo_instancia(self):
         return ("método de instância chamado", self)
-#  chamado a partir do nosso objeto, e self é a referência pro objeto
+
+    #  chamado a partir do nosso objeto, e self é a referência pro objeto
 
     @classmethod
     def metodo_classe(cls):
         return ("método de classe chamado", cls)
-#  chamado a partir de uma classe
+
+    #  chamado a partir de uma classe
 
     @staticmethod
     def metodo_estatico():
-        return ("estático chamado")
+        return "estático chamado"
+
+
 #  está dentro do corpo da nossa classe, porém ele não tem referência nem a
 #  nossa classe nem a alguma instância dessa classe, é um método independente
 #  não recebe nenhum argumento

@@ -3,19 +3,20 @@ from django.db import models
 
 # Create your models here
 class Categoria(models.Model):
-    nome = models.CharField(max_length=256, blank=False,unique=True)
+    nome = models.CharField(max_length=256, blank=False, unique=True)
 
     def __str__(self):
         return f"{self.nome} <{self.id}>"
-    
+
     @classmethod
-    def cria_categoria(cls,nome):
+    def cria_categoria(cls, nome):
         if not nome:
             raise ValueError("Categoria precisa de um nome.")
         if nome:
             categoria = Categoria(nome=nome)
         categoria.save()
         return categoria
+
 
 class Evento(models.Model):
     nome = models.CharField(max_length=256)

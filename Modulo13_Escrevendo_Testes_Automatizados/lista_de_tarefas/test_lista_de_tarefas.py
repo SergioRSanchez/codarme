@@ -26,10 +26,14 @@ class TestGetTarefas(unittest.TestCase):
         lista.adicionar_tarefa(tarefa_um)
         lista.adicionar_tarefa(tarefa_dois)
 
-        self.assertEqual(lista.get_tarefas(), [
-            tarefa_um,
-            tarefa_dois,
-        ])
+        self.assertEqual(
+            lista.get_tarefas(),
+            [
+                tarefa_um,
+                tarefa_dois,
+            ],
+        )
+
 
 class TestGetTarefasAtrasadas(unittest.TestCase):
     def test_retorna_lista_de_tarefas_atrasadas(self):
@@ -40,7 +44,8 @@ class TestGetTarefasAtrasadas(unittest.TestCase):
 
         lista.adicionar_tarefa(tarefa)
 
-        self.assertEqual(lista.get_tarefas_atrasadas(),[tarefa])
+        self.assertEqual(lista.get_tarefas_atrasadas(), [tarefa])
+
 
 class TestGetTarefasDeHoje(unittest.TestCase):
     def test_retorna_lista_de_tarefas_de_hoje(self):

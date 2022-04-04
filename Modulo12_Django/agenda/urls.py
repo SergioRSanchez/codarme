@@ -1,5 +1,11 @@
 from django.urls import path
-from agenda.views import exibir_evento, listar_eventos, participar_evento, exibir_categoria, listar_categorias
+from agenda.views import (
+    exibir_evento,
+    listar_eventos,
+    participar_evento,
+    exibir_categoria,
+    listar_categorias,
+)
 
 urlpatterns = [
     path("", listar_eventos, name="listar_eventos_raiz"),
