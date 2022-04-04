@@ -4,5 +4,5 @@ from agenda.views import agendamento_detail, agendamento_list, horarios_list
 urlpatterns = [
     path('agendamentos/', agendamento_list),
     path('agendamentos/<int:id>/', agendamento_detail),
-    path('horarios/<str:data_horario>/', horarios_list),
+    path('horarios/<str:data>/', horarios_list),  # Não sei se está certo
 ]

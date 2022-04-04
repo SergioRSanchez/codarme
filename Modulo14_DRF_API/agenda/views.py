@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from datetime import datetime
 
 from agenda.models import Agendamento
 from agenda.serializers import AgendamentoSerializer
@@ -65,11 +66,11 @@ def agendamento_list(request):
 
 
 @api_view(http_method_names=["GET"]) 
-def horarios_list(request, data_horario):
-    obj = get_object_or_404(Agendamento, data_horario=data_horario)
-    if request.method == "GET":
-        #  Buscar instância de Agendamento
-        #  Instanciar serializer passando a instância de Agendamento
-        serializer = AgendamentoSerializer(obj)
-        #  Retornar JsonResponse com os dados do serializer
-        return JsonResponse(serializer.data, status=200)
+def horarios_list(request):
+    data = request.queryparams.get("data")
+    data = datetime.strptime(data, '%Y-%m-%d').date()
+    obj = Agendamento.objects.filter(data_horario__date=data)
+    serializer = AgendamentoSerializer(obj, many=True)
+    return JsonResponse(serializer.data, safe=True)
+
+#  Ainda não está certo, irei voltar posteriormente para melhorar.
