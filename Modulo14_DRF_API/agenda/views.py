@@ -1,7 +1,10 @@
+from functools import partial
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+from rest_framework.views import APIView
+
 from datetime import datetime
 
 from agenda.models import Agendamento
@@ -10,8 +13,60 @@ from agenda.serializers import AgendamentoSerializer
 
 # Create your views here.
 
+class AgendamentoDetail(APIView):
+    def get(self, request, id):
+        obj = get_object_or_404(Agendamento, id=id)
+        serializer = AgendamentoSerializer(obj)
+        return JsonResponse(serializer.data, status=200)
+    def patch(self, request, id):
+        obj = get_object_or_404(Agendamento, id=id)
+        serializer = AgendamentoSerializer(obj, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=200)
+        return JsonResponse(serializer.errors, status=400)
+    def delete(self, request, id):
+        obj = get_object_or_404(Agendamento, id=id)
+        obj.horario_cancelado = True
+        obj.save()
+        return JsonResponse({}, status=204)
+        
+
+class AgendamentoList(APIView):  #  Esse tipo de estrutura é chamado de "Class based view", ou seja, views baseadas em classes
+    def get(self, request):
+        queryset = Agendamento.objects.exclude(horario_cancelado=True)
+        serializer = AgendamentoSerializer(queryset, many=True)  # many=True indica que o objeto sendo serializado é uma coleção
+        return JsonResponse(serializer.data, safe=False)
+    
+    def post(self, request):
+        data = request.data
+        serializer = AgendamentoSerializer(data=data)
+        if serializer.is_valid():
+            validated_data = serializer.validated_data
+            serializer.save()
+            return JsonResponse(serializer.data, status=201)
+        return JsonResponse(serializer.errors, status=400)
+
+
+@api_view(http_method_names=["GET"]) 
+def get_horarios(request):
+    data = request.query_params.get("data")
+    if not data:
+        data = datetime.now().date()
+    else:
+        data = datetime.fromisoformat(data).date()
+    
+    horarios_disponiveis = sorted(list(get_horarios_disponiveis(data)))
+    return JsonResponse(horarios_disponiveis, safe=False)
+
+#  Ainda não está certo, irei voltar posteriormente para melhorar.
+
+
+'''  # Esse tipo de estrutura é chamado de "Function based view", ou seja, views baseadas em funções
+     #  Irei deixar comentado os métodos abaixo, pois eles não são necessários, mas deixei para consultas posteriores
+
 @api_view(http_method_names=["GET", "PUT", "PATCH", "DELETE"])
-def agendamento_detail(request, id):
+def agendamento_detail(request, id):  
     obj = get_object_or_404(Agendamento, id=id)
     if request.method == "GET":
         #  Buscar instância de Agendamento
@@ -42,12 +97,9 @@ def agendamento_detail(request, id):
         obj.horario_cancelado = True  # Para isso tenho que criar um atributo "cancelado" em models.py, e fazer a migração. Quando criamos o objeto, esse atributo está como 'False', e quando cancelamos, ele deve virar 'True'
         obj.save()
         return Response(status=204)
+'''
 
-#  Os objetos cancelados deve ser removidos da listagem de agendamento abaixo
-#  Como requisito, não deve aparecer o atributo 'cancelado', portanto não devo mexer no AgendamentoSerializer, somente em models.py mesmo
-
-
-@api_view(http_method_names=["GET", "POST"]) 
+'''@api_view(http_method_names=["GET", "POST"]) 
 def agendamento_list(request):
     if request.method == "GET":
         queryset = Agendamento.objects.exclude(horario_cancelado=True)
@@ -63,14 +115,4 @@ def agendamento_list(request):
             return JsonResponse(serializer.data, status=201)
         # TODO: retornar JsonResponse com os erros do serializer e status 400
         return JsonResponse(serializer.errors, status=400)
-
-
-@api_view(http_method_names=["GET"]) 
-def horarios_list(request):
-    data = request.queryparams.get("data")
-    data = datetime.strptime(data, '%Y-%m-%d').date()
-    obj = Agendamento.objects.filter(data_horario__date=data)
-    serializer = AgendamentoSerializer(obj, many=True)
-    return JsonResponse(serializer.data, safe=True)
-
-#  Ainda não está certo, irei voltar posteriormente para melhorar.
+'''
