@@ -64,4 +64,12 @@ def agendamento_list(request):
         return JsonResponse(serializer.errors, status=400)
 
 
-
+@api_view(http_method_names=["GET"]) 
+def horarios_list(request, data_horario):
+    obj = get_object_or_404(Agendamento, data_horario=data_horario)
+    if request.method == "GET":
+        #  Buscar instância de Agendamento
+        #  Instanciar serializer passando a instância de Agendamento
+        serializer = AgendamentoSerializer(obj)
+        #  Retornar JsonResponse com os dados do serializer
+        return JsonResponse(serializer.data, status=200)
