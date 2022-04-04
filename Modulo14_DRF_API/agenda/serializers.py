@@ -4,15 +4,21 @@ import re
 
 from agenda.models import Agendamento
 
-class AgendamentoSerializer(serializers.Serializer):
-    data_horario = serializers.DateTimeField()
+class AgendamentoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Agendamento
+        fields = ("id", "data_horario", "nome_cliente", "email_cliente", "telefone_cliente")
+    """ data_horario = serializers.DateTimeField()
     nome_cliente = serializers.CharField(max_length=255)
     email_cliente = serializers.EmailField()
-    telefone_cliente = serializers.CharField(max_length=20)
+    telefone_cliente = serializers.CharField(max_length=20) """
 
     def validate_data_horario(self, data_horario):
         if data_horario < timezone.now():
             raise serializers.ValidationError("A data e hora devem ser futuras")
+        if data_horario.hour < 9 or data_horario.hour > 11 and data_horario.hour < 13 or data_horario.hour > 17:
+            raise serializers.ValidationError("O horário deve estar entre 9 e 18 horas. Horário de almoço entre 12 e 13 horas")
+    
         return data_horario
     
     def validate(self, attrs):
@@ -29,10 +35,16 @@ class AgendamentoSerializer(serializers.Serializer):
         validate = r"[0-9+()-]{7}$"
         if not re.search(validate, telefone_cliente):
             raise serializers.ValidationError("O telefone deve conter apenas números ou caracteres especiais")
-        #  O mesmo email_cliente não pode realizar mais de um agendamento no mesmo dia
+        if Agendamento.objects.filter(email_cliente=email_cliente, data_horario__day=attrs["data_horario"].day).exists():
+            raise serializers.ValidationError("O cliente já está cadastrado para um agendamento no dia selecionado")
+        # O horário de um agendamento deve ter um espaço de 30 minutos entre outro agendamento
+        if Agendamento.objects.filter(data_horario__day=attrs["data_horario"].day, data_horario__hour=attrs["data_horario"].hour).exists():
+            raise serializers.ValidationError("O horário selecionado já está ocupado")
+        
         return attrs
 
-    def create(self, validated_data):
+#  Como estou usando o ModelSerializer, eu não preciso utilizar esses métodos abaixo:
+"""     def create(self, validated_data):
         agendamento = Agendamento.objects.create(
             data_horario=validated_data["data_horario"],
             nome_cliente=validated_data["nome_cliente"],
@@ -47,4 +59,4 @@ class AgendamentoSerializer(serializers.Serializer):
         instance.email_cliente = validated_data.get("email_cliente", instance.email_cliente)
         instance.telefone_cliente = validated_data.get("telefone_cliente", instance.telefone_cliente)
         instance.save()
-        return instance
+        return instance """
