@@ -74,6 +74,7 @@ def agendamento_detail(request, id):
         serializer = AgendamentoSerializer(obj)
         #  Retornar JsonResponse com os dados do serializer
         return JsonResponse(serializer.data, status=200)
+        
     if request.method == "PUT":  #  Esse método não se faz necessário, visto que temos o método Patch listado abaixo, porém deixei para posteriores consultas se necessárias
         serializer = AgendamentoSerializer(data=request.data)
         if serializer.is_valid():
