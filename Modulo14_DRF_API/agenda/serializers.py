@@ -35,7 +35,7 @@ class AgendamentoSerializer(serializers.ModelSerializer):
         validate = r"[0-9+()-]{7}$"
         if not re.search(validate, telefone_cliente):
             raise serializers.ValidationError("O telefone deve conter apenas números ou caracteres especiais")
-        if Agendamento.objects.filter(email_cliente=email_cliente, data_horario__day=attrs["data_horario"].day).exists():
+        if Agendamento.objects.filter(email_cliente=email_cliente, data_horario__day=attrs["data_horario"].day).exists(): # está errado, pois ele como mesmo dia de meses diferentes
             raise serializers.ValidationError("O cliente já está cadastrado para um agendamento no dia selecionado")
         # O horário de um agendamento deve ter um espaço de 30 minutos entre outro agendamento
         if Agendamento.objects.filter(data_horario__day=attrs["data_horario"].day, data_horario__hour=attrs["data_horario"].hour).exists():

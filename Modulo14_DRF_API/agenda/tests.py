@@ -24,7 +24,7 @@ class TestListagemAgendamento(APITestCase):
             }
         self.assertEqual(data, [agendamento_serializado])
     
-    
+
 class TestCriacaoAgendamento(APITestCase):
     def test_cria_agendamento(self):
         agendamento_request_data = {
@@ -50,7 +50,7 @@ class TestCriacaoAgendamento(APITestCase):
             "data_horario": "2019-01-01T00:00:00Z",
             "nome_cliente": "João",
             "email_cliente": "joao@email.com",
-            "telefone_cliente": "(11) 99999-9999"
+            "telefone_cliente": "(11)99999-9999"
             }
         agendamento_criado = Agendamento.objects.get()
         self.assertEqual(agendamento_criado.nome_cliente, "João")

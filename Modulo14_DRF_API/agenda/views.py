@@ -1,9 +1,12 @@
+from cgitb import lookup
 from functools import partial
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import mixins
+from rest_framework import generics
 
 from datetime import datetime
 
@@ -13,39 +16,67 @@ from agenda.serializers import AgendamentoSerializer
 
 # Create your views here.
 
-class AgendamentoDetail(APIView):
-    def get(self, request, id):
-        obj = get_object_or_404(Agendamento, id=id)
+class AgendamentoDetail(
+    mixins.RetrieveModelMixin,  # RetrieveModelMixin -> Retorna um objeto específico
+    mixins.UpdateModelMixin,  # UpdateModelMixin -> Atualiza um objeto específico
+    mixins.DestroyModelMixin,  # DestroyModelMixin -> Deleta um objeto específico
+    generics.GenericAPIView,
+):
+    queryset = Agendamento.objects.all()
+    serializer_class = AgendamentoSerializer
+    #lookup_field = 'id'  # Para que o id seja o campo de busca
+    #  Porém, preferimos por utilizar o 'pk', já que estamos usando muitas abstrações do django rest framework, tentamos customizar o menor número possível
+
+    def get(self, request, *args, **kwargs):
+        return self.retrieve(request, *args, **kwargs)
+        """ obj = get_object_or_404(Agendamento, id=id)
         serializer = AgendamentoSerializer(obj)
-        return JsonResponse(serializer.data, status=200)
-    def patch(self, request, id):
-        obj = get_object_or_404(Agendamento, id=id)
+        return JsonResponse(serializer.data, status=200) """
+    
+    def patch(self, request, *args, **kwargs):
+        return self.partial_update(request, *args, **kwargs)
+        """ obj = get_object_or_404(Agendamento, id=id)
         serializer = AgendamentoSerializer(obj, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=200)
-        return JsonResponse(serializer.errors, status=400)
-    def delete(self, request, id):
-        obj = get_object_or_404(Agendamento, id=id)
+        return JsonResponse(serializer.errors, status=400) """
+    
+    def put(self, request, *args, **kwargs):
+        return self.update(request, *args, **kwargs)
+
+    def delete(self, request, *args, **kwargs):
+        return self.destroy(request, *args, **kwargs)
+        """ obj = get_object_or_404(Agendamento, id=id)
         obj.horario_cancelado = True
         obj.save()
-        return JsonResponse({}, status=204)
+        return JsonResponse({}, status=204) """
         
 
-class AgendamentoList(APIView):  #  Esse tipo de estrutura é chamado de "Class based view", ou seja, views baseadas em classes
-    def get(self, request):
-        queryset = Agendamento.objects.exclude(horario_cancelado=True)
+#  Esse tipo de estrutura é chamado de "Class based view", ou seja, views baseadas em classes
+class AgendamentoList(
+    mixins.ListModelMixin,  # Adicionar mixin de listagem
+    mixins.CreateModelMixin,  # Adicionar mixin de criação
+    generics.GenericAPIView,  # Classe genérica de API
+):  
+    queryset = Agendamento.objects.exclude(horario_cancelado=True)
+    serializer_class = AgendamentoSerializer
+
+    def get(self, request, *args, **kwargs):
+        return self.list(request, *args, **kwargs)
+        """ queryset = Agendamento.objects.exclude(horario_cancelado=True)
         serializer = AgendamentoSerializer(queryset, many=True)  # many=True indica que o objeto sendo serializado é uma coleção
-        return JsonResponse(serializer.data, safe=False)
+        return JsonResponse(serializer.data, safe=False) """
     
-    def post(self, request):
-        data = request.data
+    def post(self, request, *args, **kwargs):
+        return self.create(request, *args, **kwargs)
+        """ data = request.data
         serializer = AgendamentoSerializer(data=data)
         if serializer.is_valid():
             validated_data = serializer.validated_data
             serializer.save()
             return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+        return JsonResponse(serializer.errors, status=400) """
 
 
 @api_view(http_method_names=["GET"]) 
@@ -74,7 +105,7 @@ def agendamento_detail(request, id):
         serializer = AgendamentoSerializer(obj)
         #  Retornar JsonResponse com os dados do serializer
         return JsonResponse(serializer.data, status=200)
-        
+
     if request.method == "PUT":  #  Esse método não se faz necessário, visto que temos o método Patch listado abaixo, porém deixei para posteriores consultas se necessárias
         serializer = AgendamentoSerializer(data=request.data)
         if serializer.is_valid():
