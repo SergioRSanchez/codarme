@@ -16,7 +16,29 @@ from agenda.serializers import AgendamentoSerializer
 
 # Create your views here.
 
+""" A gente começou construindo nossa view passo a passo, mostrando todo o processo, pegando item por item no banco de
+dados, para no final construir ela usando uma API Genérica, que é uma API que faz o CRUD de forma genérica, com muitas
+funções prontas, como o Create, Update, Delete, List, Retrieve, etc. """
 
+
+class AgendamentoList(generics.ListCreateAPIView):  # /api/agendamentos/
+    queryset = Agendamento.objects.exclude(horario_cancelado=True)
+    serializer_class = AgendamentoSerializer
+
+
+class AgendamentoDetail(
+    generics.RetrieveUpdateDestroyAPIView  # faz todo o CRUD de um único item
+):  # /api/agendamentos/<pk>/
+    queryset = Agendamento.objects.all()
+    serializer_class = AgendamentoSerializer
+
+    def perform_destroy(self, instance):
+        instance.horario_cancelado = True
+        instance.save()
+
+
+""" 
+====> Class Based View do Agendamento Detail usando mixins
 class AgendamentoDetail(
     mixins.RetrieveModelMixin,  # RetrieveModelMixin -> Retorna um objeto específico
     mixins.UpdateModelMixin,  # UpdateModelMixin -> Atualiza um objeto específico
@@ -30,31 +52,19 @@ class AgendamentoDetail(
 
     def get(self, request, *args, **kwargs):
         return self.retrieve(request, *args, **kwargs)
-        """ obj = get_object_or_404(Agendamento, id=id)
-        serializer = AgendamentoSerializer(obj)
-        return JsonResponse(serializer.data, status=200) """
 
     def patch(self, request, *args, **kwargs):
         return self.partial_update(request, *args, **kwargs)
-        """ obj = get_object_or_404(Agendamento, id=id)
-        serializer = AgendamentoSerializer(obj, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return JsonResponse(serializer.data, status=200)
-        return JsonResponse(serializer.errors, status=400) """
 
     def put(self, request, *args, **kwargs):
         return self.update(request, *args, **kwargs)
 
     def delete(self, request, *args, **kwargs):
         return self.destroy(request, *args, **kwargs)
-        """ obj = get_object_or_404(Agendamento, id=id)
-        obj.horario_cancelado = True
-        obj.save()
-        return JsonResponse({}, status=204) """
 
 
-#  Esse tipo de estrutura é chamado de "Class based view", ou seja, views baseadas em classes
+
+====> Class Based View do Agendamento List usando mixins
 class AgendamentoList(
     mixins.ListModelMixin,  # Adicionar mixin de listagem
     mixins.CreateModelMixin,  # Adicionar mixin de criação
@@ -64,23 +74,54 @@ class AgendamentoList(
     serializer_class = AgendamentoSerializer
 
     def get(self, request, *args, **kwargs):
-        return self.list(request, *args, **kwargs)
-        """ queryset = Agendamento.objects.exclude(horario_cancelado=True)
-        serializer = AgendamentoSerializer(queryset, many=True)  # many=True indica que o objeto sendo serializado é uma coleção
-        return JsonResponse(serializer.data, safe=False) """
-
+        return self.list(request, *args, **kwargs) 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
-        """ data = request.data
+
+
+
+
+====> Class Based View do Agendamento Detail usando APIView
+class AgendaDetail(APIView):
+        obj = get_object_or_404(Agendamento, id=id)
+        serializer = AgendamentoSerializer(obj)
+        return JsonResponse(serializer.data, status=200)
+
+class AgendaDetail(APIView):
+        obj = get_object_or_404(Agendamento, id=id)
+        serializer = AgendamentoSerializer(obj, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return JsonResponse(serializer.data, status=200)
+        return JsonResponse(serializer.errors, status=400)
+class AgendaDetail(APIView):
+        obj = get_object_or_404(Agendamento, id=id)
+        obj.horario_cancelado = True
+        obj.save()
+        return JsonResponse({}, status=204) 
+
+
+
+=====> Class Based View do Agendamento Detail usando APIView
+class AgendaDetail(APIView):
+        queryset = Agendamento.objects.exclude(horario_cancelado=True)
+        serializer = AgendamentoSerializer(queryset, many=True)  # many=True indica que o objeto sendo serializado é uma coleção
+        return JsonResponse(serializer.data, safe=False)
+
+class AgendaDetail(APIView):
+        data = request.data
         serializer = AgendamentoSerializer(data=data)
         if serializer.is_valid():
             validated_data = serializer.validated_data
             serializer.save()
             return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400) """
+        return JsonResponse(serializer.errors, status=400) 
+"""
 
 
-@api_view(http_method_names=["GET"])
+@api_view(
+    http_method_names=["GET"]
+)  #  Temos que fazer a get_horarios_disponiveis em agenda/utils.py para funcionar
 def get_horarios(request):
     data = request.query_params.get("data")
     if not data:
@@ -92,11 +133,11 @@ def get_horarios(request):
     return JsonResponse(horarios_disponiveis, safe=False)
 
 
-#  Ainda não está certo, irei voltar posteriormente para melhorar.
+"""
+# Esse tipo de estrutura é chamado de "Function based view", ou seja, views baseadas em funções
+#  Irei deixar comentado os métodos abaixo, pois eles não são necessários, mas deixei para consultas posteriores
 
-
-"""  # Esse tipo de estrutura é chamado de "Function based view", ou seja, views baseadas em funções
-     #  Irei deixar comentado os métodos abaixo, pois eles não são necessários, mas deixei para consultas posteriores
+=====> Function Based View do Agendamento Detail
 
 @api_view(http_method_names=["GET", "PUT", "PATCH", "DELETE"])
 def agendamento_detail(request, id):  
@@ -131,9 +172,11 @@ def agendamento_detail(request, id):
         obj.horario_cancelado = True  # Para isso tenho que criar um atributo "cancelado" em models.py, e fazer a migração. Quando criamos o objeto, esse atributo está como 'False', e quando cancelamos, ele deve virar 'True'
         obj.save()
         return Response(status=204)
-"""
 
-"""@api_view(http_method_names=["GET", "POST"]) 
+
+====> Function Based View do Agendamento List
+
+@api_view(http_method_names=["GET", "POST"]) 
 def agendamento_list(request):
     if request.method == "GET":
         queryset = Agendamento.objects.exclude(horario_cancelado=True)
