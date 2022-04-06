@@ -1,5 +1,7 @@
+from itsdangerous import TimedSerializer
 from rest_framework import serializers
 from django.utils import timezone
+from datetime import timedelta
 import re
 
 from agenda.models import Agendamento
@@ -36,7 +38,26 @@ class AgendamentoSerializer(serializers.ModelSerializer):
 
         return data_horario
 
-    def validate(self, attrs):
+    def validate_telefone_cliente(self, attrs):
+        telefone_cliente = attrs
+
+        if len(telefone_cliente) < 8:
+            raise serializers.ValidationError(
+                "O telefone deve ter pelo menos 8 dígitos"
+            )
+
+        for char in telefone_cliente:
+            if char not in "0123456789+-()":
+                raise serializers.ValidationError(
+                    "O telefone deve conter apenas números e os caracteres especiais + e ()"
+                )
+            if char in "+" and telefone_cliente.startswith("+"):
+                raise serializers.ValidationError(
+                    "O sinal de '+' apenas pode ser utilizado no começo do número de telefone."
+                )
+        return attrs
+
+    def validate_email_cliente(self, attrs):
         telefone_cliente = attrs.get("telefone_cliente", "")
         email_cliente = attrs.get("email_cliente", "")
 
@@ -48,34 +69,12 @@ class AgendamentoSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError(
                 "O telefone deve ser no formato +55XX-XXXX-XXXX"
             )
-        if len(telefone_cliente) < 8:
-            raise serializers.ValidationError(
-                "O telefone deve ter pelo menos 8 dígitos"
-            )
-        for i in telefone_cliente:
-            if i == "+" and not telefone_cliente.startswith("+"):
-                raise serializers.ValidationError(
-                    "Se o número conter o caractere +, ele deve estar no início do telefone"
-                )
-        validate = r"[0-9+()-]{7}$"
+
+    """ validate = r"[0-9+()-]{7}$"
         if not re.search(validate, telefone_cliente):
             raise serializers.ValidationError(
                 "O telefone deve conter apenas números ou caracteres especiais"
-            )
-        if Agendamento.objects.filter(
-            email_cliente=email_cliente, data_horario__day=attrs["data_horario"].day
-        ).exists():  # está errado, pois ele como mesmo dia de meses diferentes
-            raise serializers.ValidationError(
-                "O cliente já está cadastrado para um agendamento no dia selecionado"
-            )
-        # O horário de um agendamento deve ter um espaço de 30 minutos entre outro agendamento
-        if Agendamento.objects.filter(
-            data_horario__day=attrs["data_horario"].day,
-            data_horario__hour=attrs["data_horario"].hour,
-        ).exists():
-            raise serializers.ValidationError("O horário selecionado já está ocupado")
-
-        return attrs
+            ) """
 
 
 #  Como estou usando o ModelSerializer, eu não preciso utilizar esses métodos abaixo:
