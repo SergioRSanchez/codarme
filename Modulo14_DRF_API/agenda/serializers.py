@@ -1,8 +1,10 @@
-from itsdangerous import TimedSerializer
+import pytz
 from rest_framework import serializers
 from django.utils import timezone
-from datetime import timedelta
+from datetime import timedelta, date, datetime, time, tzinfo
 import re
+from django.forms import ValidationError
+from django.utils import timezone
 
 from agenda.models import Agendamento
 
@@ -23,58 +25,105 @@ class AgendamentoSerializer(serializers.ModelSerializer):
     email_cliente = serializers.EmailField()
     telefone_cliente = serializers.CharField(max_length=20) """
 
-    def validate_data_horario(self, data_horario):
-        if data_horario < timezone.now():
+    def validate_data_horario(self, value):
+        # não pode horários passados
+        if value < timezone.now():
             raise serializers.ValidationError("A data e hora devem ser futuras")
+        # não pode fora do horário de serviço
         if (
-            data_horario.hour < 9
-            or data_horario.hour > 11
-            and data_horario.hour < 13
-            or data_horario.hour > 17
+            (
+                (0 <= value.weekday() <= 4)
+                and not (
+                    (time(hour=9) <= value.time() < time(hour=12))
+                    or (time(hour=13) <= value.time() < time(hour=18))
+                )
+            )
+            or (
+                value.weekday() == 5
+                and not (time(hour=9) <= value.time() < time(hour=13))
+            )
+            or (value.weekday() == 6)
         ):
             raise serializers.ValidationError(
-                "O horário deve estar entre 9 e 18 horas. Horário de almoço entre 12 e 13 horas"
+                "Agendamentos apenas de segunda a sexta das 9 às 12 pela manhã e das 13 às 18 pela tarde ou no sábado das 9 às 13!"
+            )
+        # horários devem ser de 30 em 30 minutos
+        if (value.minute % 30) != 0:
+            raise serializers.ValidationError(
+                "Agendamentos devem ser de 30 em 30 minutos!"
             )
 
-        return data_horario
+        return value
 
     def validate_telefone_cliente(self, attrs):
         telefone_cliente = attrs
-
+        # pelo menos 8 caracteres
         if len(telefone_cliente) < 8:
             raise serializers.ValidationError(
                 "O telefone deve ter pelo menos 8 dígitos"
             )
-
+        # conter somente números e caracteres especiais, se conter o '+'deve vir no inicio
         for char in telefone_cliente:
             if char not in "0123456789+-()":
                 raise serializers.ValidationError(
                     "O telefone deve conter apenas números e os caracteres especiais + e ()"
                 )
-            if char in "+" and telefone_cliente.startswith("+"):
+            if char in "+" and not telefone_cliente.startswith("+"):
                 raise serializers.ValidationError(
                     "O sinal de '+' apenas pode ser utilizado no começo do número de telefone."
                 )
         return attrs
-
-    def validate_email_cliente(self, attrs):
-        telefone_cliente = attrs.get("telefone_cliente", "")
-        email_cliente = attrs.get("email_cliente", "")
-
-        if (
-            email_cliente.endswith(".br")
-            and telefone_cliente.startswith("+")
-            and not telefone_cliente.startswith("+55")
-        ):
-            raise serializers.ValidationError(
-                "O telefone deve ser no formato +55XX-XXXX-XXXX"
-            )
 
     """ validate = r"[0-9+()-]{7}$"
         if not re.search(validate, telefone_cliente):
             raise serializers.ValidationError(
                 "O telefone deve conter apenas números ou caracteres especiais"
             ) """
+
+    def validate(self, attrs):
+        telefone_cliente = attrs.get("telefone_cliente", "")
+        email_cliente = attrs.get("email_cliente", "")
+        data_horario = attrs.get("data_horario", "")
+        if data_horario:
+            data_horario = datetime.fromisoformat(str(data_horario)).replace(
+                tzinfo=pytz.UTC
+            )
+        # se terminado em '.br' e possuir o '+' deve ser seguido por 55
+        if (
+            email_cliente.endswith(".br")
+            and telefone_cliente.startswith("+")
+            and not telefone_cliente.startswith("+55")
+        ):
+            raise serializers.ValidationError(
+                "Email brasileiro deve conter telefone brasileiro."
+            )
+        # validação das regras de horário
+        if data_horario:
+            list_email = (
+                Agendamento.objects.filter(email_cliente=email_cliente)
+                .filter(horario_cancelado=False)
+                .dates("data_horario", "day")
+            )
+            # recusa agendamento caso cliente (email) já tenha marcado um horário no dia
+            if data_horario.date() in list_email:
+                raise serializers.ValidationError(
+                    "Cliente já marcou um horário para esse dia."
+                )
+            data_inicial = data_fim = data_horario - timedelta(
+                hours=data_horario.hour, minutes=data_horario.minute
+            )
+            data_fim += timedelta(hours=23, minutes=59)
+            list_horarios_dia = (
+                Agendamento.objects.filter(data_horario__gt=data_inicial)
+                .filter(data_horario__lt=data_fim)
+                .filter(horario_cancelado=True)
+                .datetimes("data_horario", "minute")
+            )
+            # recusa horários indisponíveis
+            # horários cancelados são desconsiderados
+            if data_horario in list_horarios_dia:
+                raise serializers.ValidationError("Horário indisponível.", code=200)
+        return attrs
 
 
 #  Como estou usando o ModelSerializer, eu não preciso utilizar esses métodos abaixo:
