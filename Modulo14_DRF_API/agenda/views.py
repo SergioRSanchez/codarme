@@ -7,11 +7,13 @@ from rest_framework.views import APIView
 from rest_framework import mixins
 from rest_framework import generics
 from rest_framework import permissions
+from django.contrib.auth.models import User
 
 from datetime import datetime
 
+
 from agenda.models import Agendamento
-from agenda.serializers import AgendamentoSerializer
+from agenda.serializers import AgendamentoSerializer, PrestadorSerializer
 
 # from agenda.utils import get_horarios_disponiveis
 
@@ -77,6 +79,13 @@ class AgendamentoDetail(
     def perform_destroy(self, instance):
         instance.horario_cancelado = True
         instance.save()
+
+
+class PrestadorList(generics.ListAPIView):  # /api/agendamentos/?username=usuario1
+    serializer_class = PrestadorSerializer
+    queryset = (
+        User.objects.all()
+    )  # tem que colocar uma permissão aqui, para que somente o superuser tenha acesso a essa view
 
 
 """ 

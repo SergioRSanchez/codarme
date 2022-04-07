@@ -148,6 +148,18 @@ do nosso modelo, e não é o que queremos no caso, pois não queremos mostrar o 
         return attrs
 
 
+class PrestadorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["id", "username", "agendamentos"]
+
+    agendamentos = AgendamentoSerializer(
+        many=True, read_only=True
+    )  # ou seja, pra cada agendamento que tiver, ele vai usar o AgendamentoSerializer, exibindo todos os agendamentos com seus campos
+
+
+# Isso se chama Nested Relationship, que é uma relação entre serializers. Portanto eu tenho um serializer que tem outro serializer dentro dele
+
 #  Como estou usando o ModelSerializer, eu não preciso utilizar esses métodos abaixo:
 """     def create(self, validated_data):
         agendamento = Agendamento.objects.create(
