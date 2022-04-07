@@ -5,6 +5,7 @@ from datetime import timedelta, date, datetime, time, tzinfo
 import re
 from django.forms import ValidationError
 from django.utils import timezone
+from django.contrib.auth.models import User
 
 from agenda.models import Agendamento
 
@@ -18,12 +19,33 @@ class AgendamentoSerializer(serializers.ModelSerializer):
             "nome_cliente",
             "email_cliente",
             "telefone_cliente",
+            "prestador",
         )
+
+    """ ao invés de ficar declarando todos os campos, podemos usar o " fields = '__all__' ", porém ele expõem todos os dados
+do nosso modelo, e não é o que queremos no caso, pois não queremos mostrar o campo de 'horario_cancelado'. """
 
     """ data_horario = serializers.DateTimeField()
     nome_cliente = serializers.CharField(max_length=255)
     email_cliente = serializers.EmailField()
     telefone_cliente = serializers.CharField(max_length=20) """
+
+    """ Tem uma ordem em que as coisas são executadas no serializer:
+    1) Tipos passados => vai verificar se o tipo é int e está passando str por exemplo
+    2) Depois ele procura as validações específicas, como validate_prestador
+    3) Por último ele verifica a validação geral (object-level) => que é o método validate """
+
+    # No caso iria parar na primeira validação, pois ele entende que é um int e estamos passando uma str
+    # Portanto devemos converter ele em charfield
+    prestador = serializers.CharField()
+
+    def validate_prestador(self, value):  # value = usuario1
+        # é obrigatório passar o prestador, porém ele estava em formato 'pk', agora vamos buscar pelo username também
+        try:
+            prestador_obj = User.objects.get(username=value)
+        except User.DoesNotExist:
+            raise serializers.ValidationError("Esse prestador de serviços não existe")
+        return prestador_obj
 
     def validate_data_horario(self, value):
         # não pode horários passados
