@@ -1,4 +1,3 @@
-from cgitb import lookup
 from functools import partial
 from django.shortcuts import get_object_or_404
 from django.http import JsonResponse
@@ -13,6 +12,8 @@ from datetime import datetime
 from agenda.models import Agendamento
 from agenda.serializers import AgendamentoSerializer
 
+# from agenda.utils import get_horarios_disponiveis
+
 
 # Create your views here.
 
@@ -21,9 +22,17 @@ dados, para no final construir ela usando uma API Genérica, que é uma API que 
 funções prontas, como o Create, Update, Delete, List, Retrieve, etc. """
 
 
-class AgendamentoList(generics.ListCreateAPIView):  # /api/agendamentos/
-    queryset = Agendamento.objects.exclude(horario_cancelado=True)
+class AgendamentoList(
+    generics.ListCreateAPIView
+):  # /api/agendamentos/?username=usuario1
     serializer_class = AgendamentoSerializer
+
+    def get_queryset(self):
+        username = self.request.query_params.get("username", None)
+        queryset = Agendamento.objects.filter(prestador__username=username).exclude(
+            horario_cancelado=True
+        )
+        return queryset
 
 
 class AgendamentoDetail(
