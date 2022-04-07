@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import mixins
 from rest_framework import generics
+from rest_framework import permissions
 
 from datetime import datetime
 
@@ -21,11 +22,42 @@ from agenda.serializers import AgendamentoSerializer
 dados, para no final construir ela usando uma API Genérica, que é uma API que faz o CRUD de forma genérica, com muitas
 funções prontas, como o Create, Update, Delete, List, Retrieve, etc. """
 
+"""
+Regras de Negócios:
+- Qualquer cliente (autenticado ou não), seja capaz de criar um agendamento;
+- Regras de Permissões (Autorizações):
+    - Apenas o prestador de serviços pode visualizar todos os agendamentos de sua agenda;
+    - Apenas o prestador de serviços pode manipular os seus agendamentos.
+"""
+
+
+class IsOwnerOrCreateOnly(
+    permissions.BasePermission
+):  # Essa permissão não tem relação entre a permissão e o objeto/recurso que está sendo acessado, apenas com a API/URL que está sendo acessada
+    def has_permission(self, request, view):
+        if request.method == "POST":
+            return True
+        username = request.query_params.get("username", None)
+        if request.user.username == username:
+            return True
+        return False
+
+
+class IsPrestador(
+    permissions.BasePermission
+):  # Já nessa, a gente passa uma 'pk' para acessar/manipular um certo recurso, portanto precisamos fazer uma Object Level Permission
+    def has_object_permission(self, request, view, obj):
+        if obj.prestador == request.user:
+            return True
+        return False
+
 
 class AgendamentoList(
     generics.ListCreateAPIView
 ):  # /api/agendamentos/?username=usuario1
     serializer_class = AgendamentoSerializer
+    # permission_classes = [permissions.IsAuthenticatedOrReadOnly] => funcionava precisando de permissão pra criar, e não precisando para ler, meio que o contrário do que gostariamos.
+    permission_classes = [IsOwnerOrCreateOnly]
 
     def get_queryset(self):
         username = self.request.query_params.get("username", None)
@@ -38,6 +70,7 @@ class AgendamentoList(
 class AgendamentoDetail(
     generics.RetrieveUpdateDestroyAPIView  # faz todo o CRUD de um único item
 ):  # /api/agendamentos/<pk>/
+    permission_classes = [IsPrestador]
     queryset = Agendamento.objects.all()
     serializer_class = AgendamentoSerializer
 

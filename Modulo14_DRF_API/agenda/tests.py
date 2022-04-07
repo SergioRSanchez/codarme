@@ -8,7 +8,7 @@ from agenda.models import Agendamento
 
 class TestListagemAgendamento(APITestCase):
     def test_listagem_vazia(self):
-        response = self.client.get("/api/agendamentos/")
+        response = self.client.get("/api/agendamentos/?username=usuario1")
         data = json.loads(
             response.content
         )  #  json.loads(response.content) -> Converte o conteúdo da resposta em um dicionário
@@ -40,9 +40,12 @@ class TestCriacaoAgendamento(APITestCase):
             "nome_cliente": "João",
             "email_cliente": "joao@email.com",
             "telefone_cliente": "(11)99999-9999",
+            "prestador": "usuario1",
         }
         response = self.client.post(
-            "/api/agendamentos/", agendamento_request_data, format="json"
+            "/api/agendamentos/?=username=usuario1",
+            agendamento_request_data,
+            format="json",
         )
         agendamento_criado = Agendamento.objects.get()
         self.assertEqual(
@@ -60,6 +63,7 @@ class TestCriacaoAgendamento(APITestCase):
             nome_cliente="João",
             email_cliente="joao@email.com",
             telefone_cliente="(11) 99999-9999",
+            prestador="usuario1",
         )
         response = self.client.get("/api/agendamentos/1/")
         data = json.loads(response.content)
@@ -68,6 +72,7 @@ class TestCriacaoAgendamento(APITestCase):
             "nome_cliente": "João",
             "email_cliente": "joao@email.com",
             "telefone_cliente": "(11)99999-9999",
+            "prestador": "usuario1",
         }
         agendamento_criado = Agendamento.objects.get()
         self.assertEqual(agendamento_criado.nome_cliente, "João")
