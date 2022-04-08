@@ -1,21 +1,23 @@
 from functools import partial
 from django.shortcuts import get_object_or_404
-from django.http import JsonResponse
-from rest_framework.decorators import api_view
+from django.http import JsonResponse, HttpResponse
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import mixins
-from rest_framework import generics
-from rest_framework import permissions
+from rest_framework import generics, permissions
 from django.contrib.auth.models import User
 
 from datetime import datetime
 
 
 from agenda.models import Agendamento
-from agenda.serializers import AgendamentoSerializer, PrestadorSerializer
-
-# from agenda.utils import get_horarios_disponiveis
+from agenda.serializers import (
+    AgendamentoSerializer,
+    PrestadorSerializer,
+    SignUpUserSerializer,
+)
+from agenda.utils import gera_relatorio_prestadores, get_horarios_disponiveis
 
 
 # Create your views here.
@@ -33,9 +35,13 @@ Regras de Negócios:
 """
 
 
-class IsOwnerOrCreateOnly(
-    permissions.BasePermission
-):  # Essa permissão não tem relação entre a permissão e o objeto/recurso que está sendo acessado, apenas com a API/URL que está sendo acessada
+class IsOwnerOrCreateOnly(permissions.BasePermission):
+    """
+    Essa permissão não tem relação entre a permissão e o objeto/recurso que está sendo acessado,
+    apenas com a API/URL que está sendo acessada. Ela verifica se o usuário é Prestador do serviço
+    pelo username passado, ou se é um método POST, para criar um agendamento.
+    """
+
     def has_permission(self, request, view):
         if request.method == "POST":
             return True
@@ -45,9 +51,12 @@ class IsOwnerOrCreateOnly(
         return False
 
 
-class IsPrestador(
-    permissions.BasePermission
-):  # Já nessa, a gente passa uma 'pk' para acessar/manipular um certo recurso, portanto precisamos fazer uma Object Level Permission
+class IsPrestador(permissions.BasePermission):
+    """
+    Nessa permissão, é necessário passar uma 'pk' para acessar/manipular um certo recurso, portanto
+    precisamos fazer uma Object Level Permission.
+    """
+
     def has_object_permission(self, request, view, obj):
         if obj.prestador == request.user:
             return True
@@ -57,6 +66,10 @@ class IsPrestador(
 class AgendamentoList(
     generics.ListCreateAPIView
 ):  # /api/agendamentos/?username=usuario1
+    """
+    Para listar todos os agendamentos, verificando quem é o prestador daquele serviço.
+    """
+
     serializer_class = AgendamentoSerializer
     # permission_classes = [permissions.IsAuthenticatedOrReadOnly] => funcionava precisando de permissão pra criar, e não precisando para ler, meio que o contrário do que gostariamos.
     permission_classes = [IsOwnerOrCreateOnly]
@@ -72,6 +85,10 @@ class AgendamentoList(
 class AgendamentoDetail(
     generics.RetrieveUpdateDestroyAPIView  # faz todo o CRUD de um único item
 ):  # /api/agendamentos/<pk>/
+    """
+    Para detalhar um agendamento, verificando quem é o prestador daquele serviço.
+    """
+
     permission_classes = [IsPrestador]
     queryset = Agendamento.objects.all()
     serializer_class = AgendamentoSerializer
@@ -170,9 +187,7 @@ class AgendaDetail(APIView):
 """
 
 
-@api_view(
-    http_method_names=["GET"]
-)  #  Temos que fazer a get_horarios_disponiveis em agenda/utils.py para funcionar
+@api_view(http_method_names=["GET"])
 def get_horarios(request):
     data = request.query_params.get("data")
     if not data:
@@ -182,6 +197,11 @@ def get_horarios(request):
 
     horarios_disponiveis = sorted(list(get_horarios_disponiveis(data)))
     return JsonResponse(horarios_disponiveis, safe=False)
+
+
+@api_view(http_method_names=["GET"])
+def index(request):
+    return Response({"health": "OK"}, status=200)
 
 
 """
