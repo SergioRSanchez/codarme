@@ -6,8 +6,11 @@ import re
 from django.forms import ValidationError
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.db.models.query import QuerySet
+from rest_framework.validators import UniqueValidator
 
 from agenda.models import Agendamento
+from agenda import utils
 
 
 class AgendamentoSerializer(serializers.ModelSerializer):
@@ -69,11 +72,9 @@ do nosso modelo, e não é o que queremos no caso, pois não queremos mostrar o 
             raise serializers.ValidationError(
                 "Agendamentos apenas de segunda a sexta das 9 às 12 pela manhã e das 13 às 18 pela tarde ou no sábado das 9 às 13!"
             )
-        # horários devem ser de 30 em 30 minutos
-        if (value.minute % 30) != 0:
-            raise serializers.ValidationError(
-                "Agendamentos devem ser de 30 em 30 minutos!"
-            )
+
+        if value not in utils.get_horarios_disponiveis(value.date()):
+            raise serializers.ValidationError("Esse horário não está disponível.")
 
         return value
 
@@ -156,6 +157,16 @@ class PrestadorSerializer(serializers.ModelSerializer):
     agendamentos = AgendamentoSerializer(
         many=True, read_only=True
     )  # ou seja, pra cada agendamento que tiver, ele vai usar o AgendamentoSerializer, exibindo todos os agendamentos com seus campos
+
+
+class SignUpUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["username", "email", "password"]
+
+    email = serializers.EmailField(
+        validators=[UniqueValidator(queryset=User.objects.all())]
+    )
 
 
 # Isso se chama Nested Relationship, que é uma relação entre serializers. Portanto eu tenho um serializer que tem outro serializer dentro dele
