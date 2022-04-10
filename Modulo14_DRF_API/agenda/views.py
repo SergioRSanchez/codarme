@@ -193,15 +193,14 @@ def get_relatorio_prestadores(request):
     prestadores = User.objects.all()
     serializer = PrestadorSerializer(prestadores, many=True)
     if request.query_params.get("formato") == "csv":
-        response = (
-            HttpResponse(
-                content_type="text/csv",
-                headers={
-                    "Content-Disposition": f"attachment; filename= 'relatorio_{datetime.utcnow().strftime('%Y-%m-%d_%H:%M:%S')}'"
-                },
-            ),
+        response = HttpResponse(
+            content_type="text/csv",
+            headers={
+                "Content-Disposition": f'attachment; filename="relatorio_{datetime.utcnow().strftime("%Y-%m-%d_%H:%M:%S")}.csv"'
+            },
         )
         gera_relatorio_prestadores(response, serializer.data)
+        # Acessar essa API pelo navegar: vai iniciar o download
         return response
     else:
         return Response(serializer.data)
