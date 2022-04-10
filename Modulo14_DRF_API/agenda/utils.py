@@ -12,6 +12,10 @@ def get_horarios_disponiveis(data: date) -> Iterable[datetime]:
     Retorna uma lista com objetos do tipo datetime cujas datas são o mesmo dia passado (data)
     e os horários são os horários disponíveis para aquele dia, conforme outros agendamentos existam.
     """
+    # Chamar a API Brasil com o ano da data
+    # Verificar se os feriados retornados possuem a data igual a data solicitada pelo nosso usuário
+    # Caso afirmativo, retorna uma lista vazia
+
     if brasil_api.is_feriado(data):
         return []
 
