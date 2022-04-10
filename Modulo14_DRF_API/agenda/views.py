@@ -188,6 +188,26 @@ class AgendaDetail(APIView):
 
 
 @api_view(http_method_names=["GET"])
+@permission_classes([permissions.IsAdminUser])
+def get_relatorio_prestadores(request):
+    prestadores = User.objects.all()
+    serializer = PrestadorSerializer(prestadores, many=True)
+    if request.query_params.get("formato") == "csv":
+        response = (
+            HttpResponse(
+                content_type="text/csv",
+                headers={
+                    "Content-Disposition": f"attachment; filename= 'relatorio_{datetime.utcnow().strftime('%Y-%m-%d_%H:%M:%S')}'"
+                },
+            ),
+        )
+        gera_relatorio_prestadores(response, serializer.data)
+        return response
+    else:
+        return Response(serializer.data)
+
+
+@api_view(http_method_names=["GET"])
 def get_horarios(request):
     data = request.query_params.get("data")
     if not data:
