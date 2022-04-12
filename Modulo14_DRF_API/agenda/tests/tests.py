@@ -73,7 +73,7 @@ class TestCriacaoAgendamento(APITestCase):
 
     def test_quando_agendamento_e_no_passado_retorna_400(self):
         agendamento_request_data = {
-            "data_horario": "2023-03-15T09:00:00Z",
+            "data_horario": "2020-03-15T09:00:00Z",
             "nome_cliente": "João",
             "email_cliente": "joao@email.com",
             "telefone_cliente": "(11)99999-9999",
