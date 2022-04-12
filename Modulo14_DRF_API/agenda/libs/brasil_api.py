@@ -6,11 +6,11 @@ import logging
 
 
 def is_feriado(date: date):
-    """if settings.TESTING:
-    #  Se for Natal ou Ano Novo, retornamo True sempre (para testes)
-    if (date.day == 25 and date.month == 12) or (date.day == 1 and date.month == 1):
-        return True
-    return False"""
+    if settings.TESTING == True:
+        #  Se for Natal ou Ano Novo, retornamo True sempre (para testes)
+        if (date.day == 25 and date.month == 12) or (date.day == 1 and date.month == 1):
+            return True
+        return False
 
     ano = date.year
     r = requests.get(f"https://brasilapi.com.br/api/feriados/v1/{ano}")
