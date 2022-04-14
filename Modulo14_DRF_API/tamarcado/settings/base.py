@@ -10,23 +10,26 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 import sys
+from os import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-b*r6!vj%3z#s3qtjz9!p^t&x=qr^ey3vw1so4w4g0#0g+&^knm"
+SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "abc")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = True  # no desenvolvimento deixamos como True, em produção vai ser False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = []  # requisições vindas de local host no desenvolvimento
+# quando vamos para a produção queremos que todas as pessoas possam utilizar as requisições
 
 
 # Application definition
