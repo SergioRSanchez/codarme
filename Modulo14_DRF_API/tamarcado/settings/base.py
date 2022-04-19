@@ -14,6 +14,9 @@ import os
 from pathlib import Path
 import sys
 from os import environ
+from dotenv import load_dotenv
+
+load_dotenv()  #  Procura o arquivo .env e carrega as variáveis definidas nesse arquivo como as variáveis de ambiente
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -23,7 +26,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "abc")
+SECRET_KEY = os.environ.get("SECRET_KEY")
+breakpoint()
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True  # no desenvolvimento deixamos como True, em produção vai ser False
