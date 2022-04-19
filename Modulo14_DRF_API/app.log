@@ -23,3 +23,212 @@
 2022-04-19 21:15:48,967 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-12-25
 2022-04-19 21:15:48,974 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
 2022-04-19 21:15:49,102 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:05:38,224 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:05:57,237 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:05:57,272 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:05:57,448 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:06:25,138 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-14
+2022-04-19 23:06:25,149 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:06:25,284 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:06:40,199 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-24
+2022-04-19 23:06:40,214 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:06:40,330 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:12:39,993 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:12:41,660 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:12:48,934 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-24
+2022-04-19 23:12:48,963 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:12:49,098 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:12:57,841 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:12:57,847 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:12:57,947 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:13:14,844 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-24
+2022-04-19 23:13:14,858 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:13:14,963 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:13:20,969 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:13:20,974 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:13:21,101 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:13:27,651 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-24
+2022-04-19 23:13:27,655 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:13:27,777 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:13:51,756 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:13:53,846 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:13:56,162 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:13:56,177 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:13:56,335 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:14:06,196 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-24
+2022-04-19 23:14:06,200 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:14:06,328 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:14:11,752 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:14:11,758 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:14:11,927 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:16:04,897 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:16:05,771 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:16:07,887 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:16:08,512 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:16:12,984 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:16:13,000 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:16:13,115 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:17:18,556 django.request WARNING  Forbidden: /api/agendamentos/1/
+2022-04-19 23:18:08,106 django.request WARNING  Forbidden: /api/agendamentos/23/
+2022-04-19 23:18:22,287 django.request WARNING  Bad Request: /api/agendamentos/23/
+2022-04-19 23:19:08,188 django.request WARNING  Bad Request: /api/agendamentos/23/
+2022-04-19 23:19:14,487 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:19:14,686 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:19:14,849 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:19:20,089 django.request WARNING  Bad Request: /api/agendamentos/23/
+2022-04-19 23:19:29,626 django.request WARNING  Bad Request: /api/agendamentos/23/
+2022-04-19 23:20:09,591 django.request WARNING  Bad Request: /api/agendamentos/23/
+2022-04-19 23:20:37,402 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:20:37,406 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:20:37,518 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:24:29,883 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-12-25
+2022-04-19 23:24:29,894 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:24:30,024 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:24:36,585 django.request ERROR    Internal Server Error: /api/horarios/
+Traceback (most recent call last):
+  File "/Users/usuario1/Documents/python-codarme/venv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/usuario1/Documents/python-codarme/venv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/usuario1/Documents/python-codarme/venv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 54, in wrapped_view
+    return view_func(*args, **kwargs)
+  File "/Users/usuario1/Documents/python-codarme/venv/lib/python3.10/site-packages/django/views/generic/base.py", line 84, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/usuario1/Documents/python-codarme/venv/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/usuario1/Documents/python-codarme/venv/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/usuario1/Documents/python-codarme/venv/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/usuario1/Documents/python-codarme/venv/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/usuario1/Documents/python-codarme/venv/lib/python3.10/site-packages/rest_framework/decorators.py", line 50, in handler
+    return func(*args, **kwargs)
+  File "/Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/views.py", line 215, in get_horarios
+    data = datetime.fromisoformat(data).date()
+ValueError: Invalid isoformat string: '2022-4-23'
+2022-04-19 23:24:41,061 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:24:41,074 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:24:41,699 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:31:30,277 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:31:31,286 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:31:43,054 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:31:43,264 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:31:43,399 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:31:55,654 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:31:57,993 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:31:59,982 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:31:59,996 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:32:00,116 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:32:22,609 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:32:24,258 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:32:26,671 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:32:26,682 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:32:26,791 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:34:31,966 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:34:32,896 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:34:36,084 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:34:37,783 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:34:38,532 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:34:38,548 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:35:13,918 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:35:33,776 django.request WARNING  Bad Request: /api/agendamentos/23/
+2022-04-19 23:35:39,608 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:35:39,616 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:35:39,769 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:35:45,176 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:35:45,179 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:35:45,348 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:36:04,128 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:36:06,313 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:36:08,737 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:36:08,760 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:36:08,903 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:37:09,225 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:37:10,503 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:37:18,187 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:37:18,890 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:37:29,070 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:37:29,084 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:37:29,201 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:37:43,104 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:37:45,070 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:37:47,616 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:37:47,644 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:37:47,800 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:37:51,237 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:37:51,244 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:37:51,365 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:37:55,693 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:37:57,081 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:38:22,672 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:38:23,579 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:38:45,840 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:38:45,880 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:38:46,027 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:38:47,058 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:38:47,062 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:38:47,161 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:38:47,837 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:38:47,845 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:38:48,000 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:40:16,064 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:40:16,077 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:40:16,184 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:40:17,170 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:40:17,175 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:40:17,276 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:40:18,597 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:40:18,604 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:40:18,725 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:40:42,322 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-25
+2022-04-19 23:40:42,327 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:40:42,495 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:40:47,279 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-12-25
+2022-04-19 23:40:47,285 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:40:47,408 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:40:54,523 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:40:54,538 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:40:54,665 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:41:14,531 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:41:16,584 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:41:17,671 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:41:17,685 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:41:17,807 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:41:39,475 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:41:41,737 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:41:44,411 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:41:44,423 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:41:44,536 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:43:12,146 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-24
+2022-04-19 23:43:12,164 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:43:12,295 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:44:27,384 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:44:28,916 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:44:31,024 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:44:31,718 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:44:36,303 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-24
+2022-04-19 23:44:36,350 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:44:36,495 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:45:19,601 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:45:22,129 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:45:22,838 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-24
+2022-04-19 23:45:22,851 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:45:23,063 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:45:34,476 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:45:37,670 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:45:39,162 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-24
+2022-04-19 23:45:39,180 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:45:39,369 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:45:42,898 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-23
+2022-04-19 23:45:42,904 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:45:43,022 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:45:51,381 root         INFO     Fazendo requisição para BrasilAPI para a data: 2022-04-24
+2022-04-19 23:45:51,385 urllib3.connectionpool DEBUG    Starting new HTTPS connection (1): brasilapi.com.br:443
+2022-04-19 23:45:51,512 urllib3.connectionpool DEBUG    https://brasilapi.com.br:443 "GET /api/feriados/v1/2022 HTTP/1.1" 200 None
+2022-04-19 23:46:05,799 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/utils.py changed, reloading.
+2022-04-19 23:46:06,994 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:46:10,035 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/serializers.py changed, reloading.
+2022-04-19 23:46:11,014 django.utils.autoreload INFO     Watching for file changes with StatReloader
+2022-04-19 23:46:15,314 django.utils.autoreload INFO     /Users/usuario1/Documents/python-codarme/Modulo14_DRF_API/agenda/views.py changed, reloading.
+2022-04-19 23:46:16,189 django.utils.autoreload INFO     Watching for file changes with StatReloader
