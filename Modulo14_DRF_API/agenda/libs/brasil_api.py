@@ -6,10 +6,12 @@ import logging
 
 
 def is_feriado(date: date):
+    logging.info(f"Fazendo requisição para BrasilAPI para a data: {date.isoformat()}")
     if (
         settings.TESTING == True
     ):  # Ele verifica se está rolando um teste, se for o caso, ele retorna False
         #  Se for Natal ou Ano Novo, retornamo True sempre (para testes)
+        logging.info("Requisição não está sendo feita pois TESTING = True")
         if (date.day == 25 and date.month == 12) or (date.day == 1 and date.month == 1):
             return True
         return False

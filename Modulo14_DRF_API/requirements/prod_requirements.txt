@@ -1,0 +1,3 @@
+#  Essas são as dependencias para o modo de produção
+
+-r common.txt

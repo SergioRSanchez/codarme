@@ -1,0 +1,44 @@
+#  Este arquivo foi criado utilizando o pip freeze > requirements.txt
+#  Ele serve para instalar as dependencia do projeto, basta executar o comando:
+#  Desenvolvimento:  pip install -r requirements/dev_requirements.txt
+#  Produção:  pip install -r requirements/prod_requirements.txt
+
+asgiref==3.5.0
+astroid==2.11.2
+attrs==21.4.0
+black==22.3.0
+certifi==2021.10.8
+charset-normalizer==2.0.12
+click==8.0.4
+dill==0.3.4
+Django==4.0.3
+djangorestframework==3.13.1
+flake8==4.0.1
+Flask==2.0.3
+idna==3.3
+iniconfig==1.1.1
+isort==5.10.1
+itsdangerous==2.1.0
+Jinja2==3.0.3
+lazy-object-proxy==1.7.1
+MarkupSafe==2.1.0
+mccabe==0.6.1
+mypy-extensions==0.4.3
+packaging==21.3
+pathspec==0.9.0
+platformdirs==2.5.1
+pluggy==1.0.0
+py==1.11.0
+pycodestyle==2.8.0
+pyflakes==2.4.0
+pylint==2.13.4
+pyparsing==3.0.8
+python-dotenv==0.20.0
+python-http-client==3.3.7
+pytz==2022.1
+requests==2.27.1
+sqlparse==0.4.2
+tomli==2.0.1
+urllib3==1.26.9
+Werkzeug==2.0.3
+wrapt==1.14.0
