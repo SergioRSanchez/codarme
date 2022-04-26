@@ -1,4 +1,4 @@
--r Modulo14_DRF_API/requirements/common.txt
+-r requirements/common.txt
 django-on-heroku==1.1.2
 gunicorn==20.1.0
 psycopg2==2.9.3
